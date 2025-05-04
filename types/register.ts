@@ -1,0 +1,44 @@
+// 약관 동의 데이터
+export interface Step1Data {
+  /**
+   * 서비스 이용약관 동의 여부 (필수)
+   */
+  serviceTerms: boolean;
+
+  /**
+   * 개인정보 처리방침 동의 여부 (필수)
+   */
+  privacyTerms: boolean;
+
+  /**
+   * 마케팅 정보 수신 동의 여부 (선택)
+   */
+  marketingTerms?: boolean;
+
+  /**
+   * 모든 약관 동의 여부
+   */
+  allAgreed: boolean;
+}
+
+// 사업자 정보 데이터
+export interface Step2Data {
+  // 추후 구현 예정
+}
+
+// 매장 정보 데이터
+export interface Step3Data {
+  // 추후 구현 예정
+}
+
+// 계좌 정보 데이터
+export interface Step4Data {
+  // 추후 구현 예정
+}
+
+// 전체 회원가입 폼 데이터
+export interface RegisterFormData
+  extends Step1Data,
+    Step2Data,
+    Step3Data,
+    Step4Data {}
