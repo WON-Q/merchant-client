@@ -23,7 +23,55 @@ export interface Step1Data {
 
 // 사업자 정보 데이터
 export interface Step2Data {
-  // 추후 구현 예정
+  /**
+   * 사업자 등록증 파일
+   */
+  businessLicenseFile: string;
+
+  /**
+   * 사업자 등록 번호 (10자리)
+   */
+  businessRegistrationNo: string;
+
+  /**
+   * 상호명
+   */
+  businessName: string;
+
+  /**
+   * 대표자명
+   */
+  ownerName: string;
+
+  /**
+   * 사업장 주소
+   */
+  address: string;
+
+  /**
+   * 연락처
+   */
+  phoneNumber: string;
+
+  /**
+   * 이메일
+   */
+  email: string;
+
+  /**
+   * 사용자 ID
+   */
+  userId: string;
+
+  /**
+   * 비밀번호
+   */
+  password: string;
+
+  /**
+   * 비밀번호 확인
+   */
+  confirmPassword: string;
 }
 
 // 매장 정보 데이터
