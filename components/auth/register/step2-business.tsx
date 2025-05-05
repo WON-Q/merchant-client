@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, Upload } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Upload, Calendar } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,12 +32,17 @@ const Step2Schema = z
     ownerName: z.string().min(2, {
       message: "대표자명은 최소 2자 이상이어야 합니다.",
     }),
-    address: z.string().min(5, {
-      message: "주소를 입력해주세요.",
-    }),
     phoneNumber: z.string().regex(/^\d{10,11}$/, {
       message: "유효한 전화번호를 입력해주세요.",
     }),
+    address: z.string().min(5, {
+      message: "주소를 입력해주세요.",
+    }),
+    businessLaunchingDate: z
+      .string()
+      .regex(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, {
+        message: "날짜 형식이 올바르지 않습니다. (YYYY-MM-DD)",
+      }),
     email: z.string().email({
       message: "유효한 이메일 주소를 입력해주세요.",
     }),
@@ -92,8 +97,9 @@ export default function Step2Business({
     businessRegistrationNo: defaultValues?.businessRegistrationNo || "",
     businessName: defaultValues?.businessName || "",
     ownerName: defaultValues?.ownerName || "",
-    address: defaultValues?.address || "",
     phoneNumber: defaultValues?.phoneNumber || "",
+    address: defaultValues?.address || "",
+    businessLaunchingDate: defaultValues?.businessLaunchingDate || "",
     email: defaultValues?.email || "",
     userId: defaultValues?.userId || "",
     password: defaultValues?.password || "",
@@ -366,14 +372,21 @@ export default function Step2Business({
             />
           </div>
 
+          {/* 개업일 정보 */}
           <div className="mb-8">
             <Input
-              label="이메일"
-              placeholder="your@email.com"
-              {...form.register("email")}
-              isError={!!errors.email}
-              errorMessage={errors.email?.message}
+              label="개업일"
+              type="date"
+              leftIcon={<Calendar className="h-4 w-4 text-gray-500" />}
+              placeholder="YYYY-MM-DD"
+              {...form.register("businessLaunchingDate")}
+              isRequired
+              isError={!!errors.businessLaunchingDate}
+              errorMessage={errors.businessLaunchingDate?.message}
             />
+            <p className="text-sm text-gray-500 mt-1">
+              사업자등록증에 기재된 개업일을 입력해주세요.
+            </p>
           </div>
 
           <hr className="my-8 border-t border-gray-200" />
@@ -382,8 +395,19 @@ export default function Step2Business({
           <div>
             <h4 className="text-lg font-bold mb-6">계정 정보</h4>
 
+            {/* 이메일 */}
             <div className="mb-8">
-              <div className="flex gap-2 items-start">
+              <Input
+                label="이메일"
+                placeholder="your@email.com"
+                {...form.register("email")}
+                isError={!!errors.email}
+                errorMessage={errors.email?.message}
+              />
+            </div>
+
+            <div className="mb-8">
+              <div className="flex gap-2 items-center">
                 <div className="flex-grow">
                   <Input
                     label="아이디"
@@ -395,11 +419,8 @@ export default function Step2Business({
                     errorMessage={checkError || errors.userId?.message}
                     disabled={idChecked}
                   />
-                  <p className="text-sm text-gray-500 mt-1">
-                    영문, 숫자 조합 4-20자
-                  </p>
                 </div>
-                <div className="mt-8">
+                <div className="mt-0">
                   <Button
                     type="button"
                     variant="outline"
@@ -415,6 +436,9 @@ export default function Step2Business({
                   </Button>
                 </div>
               </div>
+              <p className="text-sm text-gray-500 mt-1">
+                영문, 숫자 조합 4-20자
+              </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">

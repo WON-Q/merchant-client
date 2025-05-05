@@ -72,6 +72,11 @@ export interface Step2Data {
    * 비밀번호 확인
    */
   confirmPassword: string;
+
+  /**
+   * 개업일 (yyyy-MM-dd)
+   */
+  businessLaunchingDate: string;
 }
 
 // 매장 운영 시간 데이터
