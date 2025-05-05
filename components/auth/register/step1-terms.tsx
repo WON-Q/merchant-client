@@ -15,11 +15,7 @@ interface Step1Props {
 /**
  * 약관 동의 단계 (Step1) 컴포넌트
  */
-export default function Step1Terms({
-  onNext,
-  onPrev,
-  formData,
-}: Step1Props) {
+export default function Step1Terms({ onNext, onPrev, formData }: Step1Props) {
   // 약관 동의 상태 관리
   const [agreements, setAgreements] = useState({
     allAgreed: formData?.allAgreed || false,
@@ -112,6 +108,7 @@ export default function Step1Terms({
                   handleAllAgree(checked as boolean)
                 }
                 size="lg"
+                data-cy="all-agree-checkbox"
               />
               <div className="space-y-1 leading-none">
                 <label className="text-lg font-bold">
@@ -134,6 +131,7 @@ export default function Step1Terms({
                     handleAgreementChange("serviceTerms", checked as boolean)
                   }
                   size="md"
+                  data-cy="service-checkbox"
                 />
               </div>
               <div className="space-y-1 leading-none">
@@ -171,6 +169,7 @@ export default function Step1Terms({
                     handleAgreementChange("privacyTerms", checked as boolean)
                   }
                   size="md"
+                  data-cy="privacy-checkbox"
                 />
               </div>
               <div className="space-y-1 leading-none">
@@ -208,6 +207,7 @@ export default function Step1Terms({
                     handleAgreementChange("marketingTerms", checked as boolean)
                   }
                   size="md"
+                  data-cy="marketing-checkbox"
                 />
               </div>
               <div className="space-y-1 leading-none">
@@ -239,6 +239,7 @@ export default function Step1Terms({
             size="lg"
             onClick={onPrev}
             leftIcon={<ArrowLeft className="h-5 w-5" />}
+            data-cy="prev-button"
           >
             이전
           </Button>
@@ -247,6 +248,7 @@ export default function Step1Terms({
             size="lg"
             onClick={handleSubmit}
             rightIcon={<ArrowRight className="h-5 w-5" />}
+            data-cy="next-button"
           >
             다음 단계로
           </Button>

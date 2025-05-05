@@ -171,6 +171,7 @@ export default function Step4Account({ onNext, onPrev, formData }: Step4Props) {
             onClick={onPrev}
             leftIcon={<ArrowLeft className="h-5 w-5" />}
             disabled={isSubmitting}
+            data-cy="prev-button"
           >
             이전
           </Button>
@@ -182,6 +183,7 @@ export default function Step4Account({ onNext, onPrev, formData }: Step4Props) {
             rightIcon={<ArrowRight className="h-5 w-5" />}
             isLoading={isSubmitting}
             loadingText="가입 처리중..."
+            data-cy="next-button"
           >
             완료
           </Button>

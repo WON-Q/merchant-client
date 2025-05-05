@@ -440,7 +440,7 @@ export default function PrivacyPage() {
       </div>
 
       <div className="mt-8 flex justify-center">
-        <Button variant="primary" size="lg">
+        <Button variant="primary" size="lg" data-cy="back-button">
           <Link href="/register">가입 페이지로 돌아가기</Link>
         </Button>
       </div>

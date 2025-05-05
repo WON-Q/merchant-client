@@ -476,6 +476,7 @@ export default function Step2Business({
             onClick={onPrev}
             className="border-2 py-6 px-8"
             leftIcon={<ArrowLeft className="h-4 w-4" />}
+            data-cy="prev-button"
           >
             이전
           </Button>
@@ -486,6 +487,7 @@ export default function Step2Business({
             onClick={handleSubmit}
             className="py-6 px-8"
             rightIcon={<ArrowRight className="h-4 w-4" />}
+            data-cy="next-button"
           >
             다음
           </Button>

@@ -42,11 +42,7 @@ const Step3Schema = z.object({
 /**
  * 매장 정보 단계 (Step3) 컴포넌트
  */
-export default function Step3Store({
-  onNext,
-  onPrev,
-  formData,
-}: Step3Props) {
+export default function Step3Store({ onNext, onPrev, formData }: Step3Props) {
   // 외부 파일에서 불러온 상수들을 사용
   const businessDaysDefault = getDefaultBusinessDays();
 
@@ -237,9 +233,7 @@ export default function Step3Store({
                     <span className="text-xl mb-3">
                       매장 대표 이미지 업로드
                     </span>
-                    <span className="text-sm text-gray-500">
-                      JPG, PNG 가능
-                    </span>
+                    <span className="text-sm text-gray-500">JPG, PNG 가능</span>
                   </div>
                 )}
               </Button>
@@ -337,6 +331,7 @@ export default function Step3Store({
             size="lg"
             onClick={onPrev}
             leftIcon={<ArrowLeft className="h-5 w-5" />}
+            data-cy="prev-button"
           >
             이전
           </Button>
@@ -346,6 +341,7 @@ export default function Step3Store({
             size="lg"
             onClick={handleSubmit}
             rightIcon={<ArrowRight className="h-5 w-5" />}
+            data-cy="next-button"
           >
             다음
           </Button>
