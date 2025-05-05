@@ -34,13 +34,9 @@ const Step4Schema = z.object({
 /**
  * 계좌 정보 단계 (Step4) 컴포넌트
  */
-export default function Step4Account({
-  onNext,
-  onPrev,
-  formData,
-}: Step4Props) {
+export default function Step4Account({ onNext, onPrev, formData }: Step4Props) {
   // 회원가입 훅
-  const { submitSignup, isSubmitting, error: submitError } = useSignup();
+  const { submitSignup, isSubmitting, signupError } = useSignup();
 
   // defaultValues 객체를 Step4Data 타입에 맞게 변환
   const initialValues: Step4Data = {
@@ -161,10 +157,10 @@ export default function Step4Account({
         </div>
 
         {/* 에러 메시지 표시 */}
-        {submitError && (
+        {signupError && (
           <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-600 text-sm">
             <p className="font-medium">회원가입 중 오류가 발생했습니다</p>
-            <p>{submitError}</p>
+            <p>{signupError}</p>
           </div>
         )}
 
