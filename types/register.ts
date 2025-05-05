@@ -122,7 +122,20 @@ export interface Step3Data {
 
 // 계좌 정보 데이터
 export interface Step4Data {
-  // 추후 구현 예정
+  /**
+   * 대표계좌 은행명
+   */
+  bankName: string;
+
+  /**
+   * 대표계좌번호
+   */
+  accountNumber: string;
+
+  /**
+   * 예금주명
+   */
+  accountHolderName: string;
 }
 
 // 전체 회원가입 폼 데이터
