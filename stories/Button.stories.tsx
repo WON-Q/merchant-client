@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/ui/Button";
 import {
-  Mail,
   ArrowRight,
-  ShoppingCart,
-  Loader,
-  Save,
   ChevronLeft,
   ChevronRight,
+  Loader,
+  Mail,
+  Save,
+  ShoppingCart,
 } from "lucide-react";
 import React from "react";
 
