@@ -14,7 +14,7 @@ import { useIdDuplicateCheck } from "@/hooks/useIdDuplicateCheck";
 interface Step2Props {
   onNext: (data: Step2Data) => void;
   onPrev: () => void;
-  defaultValues?: Partial<RegisterFormData>;
+  formData?: Partial<RegisterFormData>;
 }
 
 // Zod 스키마 정의
@@ -74,7 +74,7 @@ const Step2Schema = z
 export default function Step2Business({
   onNext,
   onPrev,
-  defaultValues,
+  formData,
 }: Step2Props) {
   const [idChecked, setIdChecked] = useState(false);
 
@@ -93,17 +93,17 @@ export default function Step2Business({
 
   // defaultValues 객체를 BusinessFormData 타입에 맞게 변환
   const initialValues: Step2Data = {
-    businessLicenseFile: defaultValues?.businessLicenseFile || "",
-    businessRegistrationNo: defaultValues?.businessRegistrationNo || "",
-    businessName: defaultValues?.businessName || "",
-    ownerName: defaultValues?.ownerName || "",
-    phoneNumber: defaultValues?.phoneNumber || "",
-    address: defaultValues?.address || "",
-    businessLaunchingDate: defaultValues?.businessLaunchingDate || "",
-    email: defaultValues?.email || "",
-    userId: defaultValues?.userId || "",
-    password: defaultValues?.password || "",
-    confirmPassword: defaultValues?.confirmPassword || "",
+    businessLicenseFile: formData?.businessLicenseFile || "",
+    businessRegistrationNo: formData?.businessRegistrationNo || "",
+    businessName: formData?.businessName || "",
+    ownerName: formData?.ownerName || "",
+    phoneNumber: formData?.phoneNumber || "",
+    address: formData?.address || "",
+    businessLaunchingDate: formData?.businessLaunchingDate || "",
+    email: formData?.email || "",
+    userId: formData?.userId || "",
+    password: formData?.password || "",
+    confirmPassword: formData?.confirmPassword || "",
   };
 
   // Todo: 아래 오류 해결

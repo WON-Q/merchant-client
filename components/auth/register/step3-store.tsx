@@ -19,7 +19,7 @@ import {
 interface Step3Props {
   onNext: (data: Step3Data) => void;
   onPrev: () => void;
-  defaultValues?: Partial<RegisterFormData>;
+  formData?: Partial<RegisterFormData>;
 }
 
 // Zod 스키마 정의
@@ -45,14 +45,14 @@ const Step3Schema = z.object({
 export default function Step3Store({
   onNext,
   onPrev,
-  defaultValues,
+  formData,
 }: Step3Props) {
   // 외부 파일에서 불러온 상수들을 사용
   const businessDaysDefault = getDefaultBusinessDays();
 
   // businessDays 상태를 컴포넌트 레벨에서 관리
   const [businessDays, setBusinessDays] = useState<BusinessDay[]>(
-    defaultValues?.businessDays || businessDaysDefault
+    formData?.businessDays || businessDaysDefault
   );
 
   // 이미지 업로드 훅 사용
@@ -69,10 +69,10 @@ export default function Step3Store({
   const form = useForm<Step3Data>({
     resolver: zodResolver(Step3Schema),
     defaultValues: {
-      storeImage: defaultValues?.storeImage || "",
-      storeImageUrl: defaultValues?.storeImageUrl || "",
-      storeDescription: defaultValues?.storeDescription || "",
-      businessDays: defaultValues?.businessDays || businessDaysDefault,
+      storeImage: formData?.storeImage || "",
+      storeImageUrl: formData?.storeImageUrl || "",
+      storeDescription: formData?.storeDescription || "",
+      businessDays: formData?.businessDays || businessDaysDefault,
     },
     mode: "onChange",
   });

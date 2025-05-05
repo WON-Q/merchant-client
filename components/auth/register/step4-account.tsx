@@ -15,7 +15,7 @@ import { useSignup } from "@/hooks/useSignup";
 interface Step4Props {
   onNext: (data: Step4Data) => void;
   onPrev: () => void;
-  defaultValues?: Partial<RegisterFormData>;
+  formData?: Partial<RegisterFormData>;
 }
 
 // Zod 스키마 정의
@@ -37,16 +37,16 @@ const Step4Schema = z.object({
 export default function Step4Account({
   onNext,
   onPrev,
-  defaultValues,
+  formData,
 }: Step4Props) {
   // 회원가입 훅
   const { submitSignup, isSubmitting, error: submitError } = useSignup();
 
   // defaultValues 객체를 Step4Data 타입에 맞게 변환
   const initialValues: Step4Data = {
-    bankName: defaultValues?.bankName || "",
-    accountNumber: defaultValues?.accountNumber || "",
-    accountHolderName: defaultValues?.accountHolderName || "",
+    bankName: formData?.bankName || "",
+    accountNumber: formData?.accountNumber || "",
+    accountHolderName: formData?.accountHolderName || "",
   };
 
   // Todo: 아래 오류 해결
@@ -83,7 +83,7 @@ export default function Step4Account({
 
     // 회원가입 처리를 위한 전체 폼 데이터 구성
     const completeFormData = {
-      ...defaultValues,
+      ...formData,
       ...currentFormData,
     } as RegisterFormData;
 
