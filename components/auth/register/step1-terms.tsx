@@ -1,6 +1,6 @@
-import { ArrowLeft, ArrowRight, Shield, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Shield } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import StepContainer from "./step-container";
 import { Button } from "@/components/ui/Button";
 import { Checkbox } from "@/components/ui/Checkbox";
@@ -9,7 +9,7 @@ import { RegisterFormData, Step1Data } from "@/types/register";
 interface Step1Props {
   onNext: (data: Step1Data) => void;
   onPrev: () => void;
-  defaultValues?: Partial<RegisterFormData>;
+  formData?: Partial<RegisterFormData>;
 }
 
 /**
@@ -18,14 +18,14 @@ interface Step1Props {
 export default function Step1Terms({
   onNext,
   onPrev,
-  defaultValues,
+  formData,
 }: Step1Props) {
   // 약관 동의 상태 관리
   const [agreements, setAgreements] = useState({
-    allAgreed: defaultValues?.allAgreed || false,
-    serviceTerms: defaultValues?.serviceTerms || false,
-    privacyTerms: defaultValues?.privacyTerms || false,
-    marketingTerms: defaultValues?.marketingTerms || false,
+    allAgreed: formData?.allAgreed || false,
+    serviceTerms: formData?.serviceTerms || false,
+    privacyTerms: formData?.privacyTerms || false,
+    marketingTerms: formData?.marketingTerms || false,
   });
 
   // 폼 제출 시도 여부 (에러 표시 용도)

@@ -1,5 +1,5 @@
 export interface HookResponse<T> {
-    success: boolean;
-    data?: T;
-    errorMessage?: string | null;
+  success: boolean;
+  data?: T;
+  errorMessage?: string | null;
 }

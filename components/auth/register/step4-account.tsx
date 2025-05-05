@@ -10,11 +10,12 @@ import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
 import { RegisterFormData, Step4Data } from "@/types/register";
 import StepContainer from "./step-container";
 import { KOREAN_BANKS } from "@/constants/banks";
+import { useSignup } from "@/hooks/api/register/useSignup";
 
 interface Step4Props {
   onNext: (data: Step4Data) => void;
   onPrev: () => void;
-  defaultValues?: Partial<RegisterFormData>;
+  formData?: Partial<RegisterFormData>;
 }
 
 // Zod 스키마 정의
@@ -33,16 +34,15 @@ const Step4Schema = z.object({
 /**
  * 계좌 정보 단계 (Step4) 컴포넌트
  */
-export default function Step4Account({
-  onNext,
-  onPrev,
-  defaultValues,
-}: Step4Props) {
+export default function Step4Account({ onNext, onPrev, formData }: Step4Props) {
+  // 회원가입 훅
+  const { submitSignup, isSubmitting, signupError } = useSignup();
+
   // defaultValues 객체를 Step4Data 타입에 맞게 변환
   const initialValues: Step4Data = {
-    bankName: defaultValues?.bankName || "",
-    accountNumber: defaultValues?.accountNumber || "",
-    accountHolderName: defaultValues?.accountHolderName || "",
+    bankName: formData?.bankName || "",
+    accountNumber: formData?.accountNumber || "",
+    accountHolderName: formData?.accountHolderName || "",
   };
 
   // Todo: 아래 오류 해결
@@ -74,8 +74,22 @@ export default function Step4Account({
       return;
     }
 
-    // 현재 폼 데이터를 Step4Data 타입으로 전달
-    onNext(getValues());
+    // 현재 폼 데이터 가져오기
+    const currentFormData = getValues();
+
+    // 회원가입 처리를 위한 전체 폼 데이터 구성
+    const completeFormData = {
+      ...formData,
+      ...currentFormData,
+    } as RegisterFormData;
+
+    // 회원가입 API 호출
+    const signupResult = await submitSignup(completeFormData);
+
+    if (signupResult.success) {
+      // 성공 시 다음 단계로
+      onNext(currentFormData);
+    }
   };
 
   return (
@@ -142,12 +156,21 @@ export default function Step4Account({
           </div>
         </div>
 
+        {/* 에러 메시지 표시 */}
+        {signupError && (
+          <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-600 text-sm">
+            <p className="font-medium">회원가입 중 오류가 발생했습니다</p>
+            <p>{signupError}</p>
+          </div>
+        )}
+
         <div className="flex justify-between mt-8">
           <Button
             variant="outline"
             size="lg"
             onClick={onPrev}
             leftIcon={<ArrowLeft className="h-5 w-5" />}
+            disabled={isSubmitting}
           >
             이전
           </Button>
@@ -157,6 +180,8 @@ export default function Step4Account({
             size="lg"
             onClick={handleSubmit}
             rightIcon={<ArrowRight className="h-5 w-5" />}
+            isLoading={isSubmitting}
+            loadingText="가입 처리중..."
           >
             완료
           </Button>

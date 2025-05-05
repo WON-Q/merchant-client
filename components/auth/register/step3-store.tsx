@@ -2,21 +2,24 @@ import React, { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowLeft, ArrowRight, Check, Upload, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Clock, Upload } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Switch } from "@/components/ui/Switch";
 import { Dropdown } from "@/components/ui/Dropdown";
 import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
-import { RegisterFormData, BusinessDay, Step3Data } from "@/types/register";
+import { BusinessDay, RegisterFormData, Step3Data } from "@/types/register";
 import StepContainer from "./step-container";
-import { useMerchantImageUpload } from "@/hooks/useMerchantImageUpload";
-import { BUSINESS_DAYS, getDefaultBusinessDays } from "@/constants/business-hours";
+import { useMerchantImageUpload } from "@/hooks/api/register/useMerchantImageUpload";
+import {
+  BUSINESS_DAYS,
+  getDefaultBusinessDays,
+} from "@/constants/business-hours";
 
 interface Step3Props {
   onNext: (data: Step3Data) => void;
   onPrev: () => void;
-  defaultValues?: Partial<RegisterFormData>;
+  formData?: Partial<RegisterFormData>;
 }
 
 // Zod 스키마 정의
@@ -42,14 +45,14 @@ const Step3Schema = z.object({
 export default function Step3Store({
   onNext,
   onPrev,
-  defaultValues,
+  formData,
 }: Step3Props) {
   // 외부 파일에서 불러온 상수들을 사용
   const businessDaysDefault = getDefaultBusinessDays();
 
   // businessDays 상태를 컴포넌트 레벨에서 관리
   const [businessDays, setBusinessDays] = useState<BusinessDay[]>(
-    defaultValues?.businessDays || businessDaysDefault
+    formData?.businessDays || businessDaysDefault
   );
 
   // 이미지 업로드 훅 사용
@@ -66,10 +69,10 @@ export default function Step3Store({
   const form = useForm<Step3Data>({
     resolver: zodResolver(Step3Schema),
     defaultValues: {
-      storeImage: defaultValues?.storeImage || "",
-      storeImageUrl: defaultValues?.storeImageUrl || "",
-      storeDescription: defaultValues?.storeDescription || "",
-      businessDays: defaultValues?.businessDays || businessDaysDefault,
+      storeImage: formData?.storeImage || "",
+      storeImageUrl: formData?.storeImageUrl || "",
+      storeDescription: formData?.storeDescription || "",
+      businessDays: formData?.businessDays || businessDaysDefault,
     },
     mode: "onChange",
   });
@@ -235,7 +238,7 @@ export default function Step3Store({
                       매장 대표 이미지 업로드
                     </span>
                     <span className="text-sm text-gray-500">
-                      JPG, PNG 가능 (최대 5MB)
+                      JPG, PNG 가능
                     </span>
                   </div>
                 )}

@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, Upload, Calendar } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Check, Upload } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,13 +8,13 @@ import StepContainer from "./step-container";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { RegisterFormData, Step2Data } from "@/types/register";
-import { useBusinessLicenseUpload } from "@/hooks/useBusinessLicenseUpload";
-import { useIdDuplicateCheck } from "@/hooks/useIdDuplicateCheck";
+import { useBusinessLicenseUpload } from "@/hooks/api/register/useBusinessLicenseUpload";
+import { useIdDuplicateCheck } from "@/hooks/api/register/useIdDuplicateCheck";
 
 interface Step2Props {
   onNext: (data: Step2Data) => void;
   onPrev: () => void;
-  defaultValues?: Partial<RegisterFormData>;
+  formData?: Partial<RegisterFormData>;
 }
 
 // Zod 스키마 정의
@@ -74,7 +74,7 @@ const Step2Schema = z
 export default function Step2Business({
   onNext,
   onPrev,
-  defaultValues,
+  formData,
 }: Step2Props) {
   const [idChecked, setIdChecked] = useState(false);
 
@@ -93,17 +93,17 @@ export default function Step2Business({
 
   // defaultValues 객체를 BusinessFormData 타입에 맞게 변환
   const initialValues: Step2Data = {
-    businessLicenseFile: defaultValues?.businessLicenseFile || "",
-    businessRegistrationNo: defaultValues?.businessRegistrationNo || "",
-    businessName: defaultValues?.businessName || "",
-    ownerName: defaultValues?.ownerName || "",
-    phoneNumber: defaultValues?.phoneNumber || "",
-    address: defaultValues?.address || "",
-    businessLaunchingDate: defaultValues?.businessLaunchingDate || "",
-    email: defaultValues?.email || "",
-    userId: defaultValues?.userId || "",
-    password: defaultValues?.password || "",
-    confirmPassword: defaultValues?.confirmPassword || "",
+    businessLicenseFile: formData?.businessLicenseFile || "",
+    businessRegistrationNo: formData?.businessRegistrationNo || "",
+    businessName: formData?.businessName || "",
+    ownerName: formData?.ownerName || "",
+    phoneNumber: formData?.phoneNumber || "",
+    address: formData?.address || "",
+    businessLaunchingDate: formData?.businessLaunchingDate || "",
+    email: formData?.email || "",
+    userId: formData?.userId || "",
+    password: formData?.password || "",
+    confirmPassword: formData?.confirmPassword || "",
   };
 
   // Todo: 아래 오류 해결
@@ -292,7 +292,7 @@ export default function Step2Business({
                     <Upload className="h-12 w-12 mb-6 text-[#FF6B35]" />
                     <span className="text-xl mb-3">사업자 등록증 업로드</span>
                     <span className="text-sm text-gray-500">
-                      PDF, JPG, PNG 가능 (최대 3MB)
+                      PDF, JPG, PNG 가능
                     </span>
                   </div>
                 )}

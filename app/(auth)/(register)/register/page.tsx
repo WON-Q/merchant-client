@@ -59,7 +59,7 @@ export default function RegisterPage() {
           <Step1Terms
             onNext={(data: Step1Data) => handleNextStep(data, 2)}
             onPrev={() => handlePrevStep(0)}
-            defaultValues={formData}
+            formData={formData}
           />
         );
       case 2:
@@ -67,7 +67,7 @@ export default function RegisterPage() {
           <Step2Business
             onNext={(data: Step2Data) => handleNextStep(data, 3)}
             onPrev={() => handlePrevStep(1)}
-            defaultValues={formData}
+            formData={formData}
           />
         );
       case 3:
@@ -75,7 +75,7 @@ export default function RegisterPage() {
           <Step3Store
             onNext={(data: Step3Data) => handleNextStep(data, 4)}
             onPrev={() => handlePrevStep(2)}
-            defaultValues={formData}
+            formData={formData}
           />
         );
       case 4:
@@ -83,7 +83,7 @@ export default function RegisterPage() {
           <Step4Account
             onNext={(data: Step4Data) => handleNextStep(data, 5)}
             onPrev={() => handlePrevStep(3)}
-            defaultValues={formData}
+            formData={formData}
           />
         );
       case 5:
