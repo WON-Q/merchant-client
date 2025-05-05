@@ -10,7 +10,7 @@ import { Dropdown } from "@/components/ui/Dropdown";
 import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
 import { BusinessDay, RegisterFormData, Step3Data } from "@/types/register";
 import StepContainer from "./step-container";
-import { useMerchantImageUpload } from "@/hooks/useMerchantImageUpload";
+import { useMerchantImageUpload } from "@/hooks/api/register/useMerchantImageUpload";
 import {
   BUSINESS_DAYS,
   getDefaultBusinessDays,

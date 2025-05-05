@@ -10,7 +10,7 @@ import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
 import { RegisterFormData, Step4Data } from "@/types/register";
 import StepContainer from "./step-container";
 import { KOREAN_BANKS } from "@/constants/banks";
-import { useSignup } from "@/hooks/useSignup";
+import { useSignup } from "@/hooks/api/register/useSignup";
 
 interface Step4Props {
   onNext: (data: Step4Data) => void;

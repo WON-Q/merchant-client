@@ -8,8 +8,8 @@ import StepContainer from "./step-container";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { RegisterFormData, Step2Data } from "@/types/register";
-import { useBusinessLicenseUpload } from "@/hooks/useBusinessLicenseUpload";
-import { useIdDuplicateCheck } from "@/hooks/useIdDuplicateCheck";
+import { useBusinessLicenseUpload } from "@/hooks/api/register/useBusinessLicenseUpload";
+import { useIdDuplicateCheck } from "@/hooks/api/register/useIdDuplicateCheck";
 
 interface Step2Props {
   onNext: (data: Step2Data) => void;
