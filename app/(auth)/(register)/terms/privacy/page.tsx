@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Shield, HelpCircle, AlertCircle, FileText } from "lucide-react";
+import { AlertCircle, FileText, HelpCircle, Shield } from "lucide-react";
 
 /**
  * 개인정보 처리방침 페이지

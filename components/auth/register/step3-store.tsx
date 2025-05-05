@@ -2,16 +2,19 @@ import React, { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowLeft, ArrowRight, Check, Upload, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Clock, Upload } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Switch } from "@/components/ui/Switch";
 import { Dropdown } from "@/components/ui/Dropdown";
 import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
-import { RegisterFormData, BusinessDay, Step3Data } from "@/types/register";
+import { BusinessDay, RegisterFormData, Step3Data } from "@/types/register";
 import StepContainer from "./step-container";
 import { useMerchantImageUpload } from "@/hooks/useMerchantImageUpload";
-import { BUSINESS_DAYS, getDefaultBusinessDays } from "@/constants/business-hours";
+import {
+  BUSINESS_DAYS,
+  getDefaultBusinessDays,
+} from "@/constants/business-hours";
 
 interface Step3Props {
   onNext: (data: Step3Data) => void;

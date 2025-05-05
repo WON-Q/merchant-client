@@ -91,14 +91,14 @@ export interface BusinessDay {
    */
   isOpen: boolean;
 
-    /**
-     * 매장 오픈 시간 (HH:mm)
-     */
+  /**
+   * 매장 오픈 시간 (HH:mm)
+   */
   openTime: string;
 
-    /**
-     * 매장 마감 시간 (HH:mm)
-     */
+  /**
+   * 매장 마감 시간 (HH:mm)
+   */
   closeTime: string;
 }
 

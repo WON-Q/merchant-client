@@ -1,21 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Check,
-  Building,
-  User,
-  FileCheck,
-  CreditCard,
   ArrowRight,
-  ExternalLink,
+  Building,
   Calendar,
-  Mail,
-  Phone,
-  MapPin,
-  Hash,
+  Check,
   Clock,
+  CreditCard,
+  ExternalLink,
+  FileCheck,
   FileText,
+  Hash,
   ImageIcon,
+  Mail,
+  MapPin,
+  Phone,
+  User,
 } from "lucide-react";
 
 import StepContainer from "./step-container";

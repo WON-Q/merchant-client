@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, Upload, Calendar } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Check, Upload } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
