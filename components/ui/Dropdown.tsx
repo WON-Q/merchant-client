@@ -1,14 +1,14 @@
 import React, {
-  forwardRef,
-  useState,
-  useEffect,
   Children,
-  isValidElement,
   cloneElement,
+  forwardRef,
+  isValidElement,
   ReactElement,
+  useEffect,
+  useState,
 } from "react";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { DropdownMenuItemProps } from "./DropdownMenuItem";
 
 export interface DropdownProps {
