@@ -3,15 +3,15 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Dropdown, DropdownProps } from "@/components/ui/Dropdown";
 import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
 import {
-  Users,
-  MapPin,
-  Calendar,
   Bell,
-  ShoppingCart,
+  Calendar,
   CreditCard,
-  TruckIcon,
+  MapPin,
   ShieldCheck,
+  ShoppingCart,
   Tag,
+  TruckIcon,
+  Users,
 } from "lucide-react";
 
 const meta = {
