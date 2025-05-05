@@ -1,8 +1,8 @@
 import React, {
   forwardRef,
   InputHTMLAttributes,
-  useState,
   useEffect,
+  useState,
 } from "react";
 import { cn } from "@/lib/utils";
 
@@ -58,7 +58,7 @@ export interface SwitchProps
 const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (
     {
-      checked = false,
+      checked,
       onCheckedChange,
       size = "md",
       disabled = false,
@@ -66,16 +66,21 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       className,
       label,
       labelPosition = "right",
+      defaultChecked = false,
       ...props
     },
     ref
   ) => {
-    // 내부 상태로 관리하여 애니메이션 처리를 개선
-    const [internalChecked, setInternalChecked] = useState(checked);
+    // 제어/비제어 상태 관리
+    const [internalChecked, setInternalChecked] = useState(
+      checked !== undefined ? checked : defaultChecked
+    );
 
-    // 외부에서 checked 값이 변경될 경우 내부 상태 업데이트
+    // 외부 checked prop이 변경될 때 내부 상태 동기화
     useEffect(() => {
-      setInternalChecked(checked);
+      if (checked !== undefined) {
+        setInternalChecked(checked);
+      }
     }, [checked]);
 
     // 스위치 사이즈에 따른 스타일
@@ -122,10 +127,23 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       error: "bg-[#EF4444]",
     };
 
+    // 클릭 핸들러 (커스텀 UI 클릭)
     const handleClick = () => {
       if (disabled) return;
 
       const newChecked = !internalChecked;
+      setInternalChecked(newChecked);
+
+      if (onCheckedChange) {
+        onCheckedChange(newChecked);
+      }
+    };
+
+    // 체크박스 변경 핸들러 (input 요소)
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (disabled) return;
+
+      const newChecked = event.target.checked;
       setInternalChecked(newChecked);
 
       if (onCheckedChange) {
@@ -158,6 +176,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             type="checkbox"
             className="sr-only"
             checked={internalChecked}
+            onChange={handleChange}
             disabled={disabled}
             ref={ref}
             {...props}

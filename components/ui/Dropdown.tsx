@@ -1,15 +1,14 @@
 import React, {
-  forwardRef,
-  useState,
-  useRef,
-  useEffect,
   Children,
-  isValidElement,
   cloneElement,
+  forwardRef,
+  isValidElement,
   ReactElement,
+  useEffect,
+  useState,
 } from "react";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { DropdownMenuItemProps } from "./DropdownMenuItem";
 
 export interface DropdownProps {
@@ -113,40 +112,35 @@ export interface DropdownProps {
 }
 
 const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
-  ({
-    value: controlledValue,
-    defaultValue,
-    onChange,
-    className,
-    variant = "default",
-    size = "md",
-    shape = "rounded",
-    fullWidth = true,
-    isError = false,
-    errorMessage,
-    isLoading = false,
-    disabled = false,
-    label,
-    isRequired = false,
-    placeholder,
-    id,
-    name,
-    children,
-  }) => {
-    // 드롭다운 열림/닫힘 상태
+  (
+    {
+      value: controlledValue,
+      defaultValue,
+      onChange,
+      className,
+      variant = "default",
+      size = "md",
+      shape = "rounded",
+      fullWidth = true,
+      isError = false,
+      errorMessage,
+      isLoading = false,
+      disabled = false,
+      label,
+      isRequired = false,
+      placeholder,
+      id,
+      name,
+      children,
+    },
+    ref
+  ) => {
     const [isOpen, setIsOpen] = useState(false);
-
-    // 내부적으로 관리되는 선택값
     const [selectedValue, setSelectedValue] = useState(defaultValue || "");
 
-    // 드롭다운 참조
-    const dropdownRef = useRef<HTMLDivElement>(null);
-
-    // 제어 컴포넌트 지원
     const isControlled = controlledValue !== undefined;
     const currentValue = isControlled ? controlledValue : selectedValue;
 
-    // 자식 DropdownMenuItem 컴포넌트에서 정보 추출
     const menuItems: {
       value: string;
       label: React.ReactNode;
@@ -166,7 +160,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       }
     });
 
-    // 선택된 옵션 라벨 표시
     const selectedItem = menuItems.find((item) => item.value === currentValue);
     const displayText = selectedItem
       ? typeof selectedItem.label === "string"
@@ -174,12 +167,13 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
         : "Selected"
       : placeholder || "선택하세요";
 
-    // 외부 클릭 감지하여 드롭다운 닫기
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (
-          dropdownRef.current &&
-          !dropdownRef.current.contains(event.target as Node)
+          ref &&
+          "current" in ref &&
+          ref.current &&
+          !ref.current.contains(event.target as Node)
         ) {
           setIsOpen(false);
         }
@@ -189,9 +183,8 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       return () => {
         document.removeEventListener("mousedown", handleClickOutside);
       };
-    }, []);
+    }, [ref]);
 
-    // 값이 변경되었을 때
     const handleSelect = (value: string) => {
       if (!isControlled) {
         setSelectedValue(value);
@@ -202,11 +195,9 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       setIsOpen(false);
     };
 
-    // 기본 선택 필드 스타일
     const baseStyles =
       "relative block w-full transition-colors duration-200 border bg-white text-neutral-700 shadow-sm focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed";
 
-    // 선택 필드 크기에 따른 스타일
     const sizeStyles = {
       xs: "h-6 px-2 text-xs",
       sm: "h-8 px-3 text-sm",
@@ -215,7 +206,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       xl: "h-14 px-6 text-xl",
     };
 
-    // 드롭다운 메뉴 max-height
     const dropdownSizeStyles = {
       xs: "max-h-36",
       sm: "max-h-48",
@@ -224,7 +214,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       xl: "max-h-80",
     };
 
-    // 옵션 아이템 크기
     const optionSizeStyles = {
       xs: "py-1 px-2 text-xs",
       sm: "py-1.5 px-3 text-sm",
@@ -233,21 +222,18 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       xl: "py-3 px-6 text-xl",
     };
 
-    // 선택 필드 모양 스타일
     const shapeStyles = {
       rounded: "rounded-lg",
       pill: "rounded-full",
       square: "rounded-none",
     };
 
-    // 드롭다운 모양 스타일
     const dropdownShapeStyles = {
       rounded: "rounded-md",
       pill: "rounded-lg",
       square: "rounded-none",
     };
 
-    // 선택 필드 변형에 따른 스타일
     const variantStyles = {
       default: cn(
         "border-[#D2D9E0]",
@@ -272,7 +258,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       ),
     };
 
-    // 로딩 스피너
     const LoadingSpinner = (
       <svg
         className="animate-spin h-4 w-4 text-neutral-400"
@@ -296,7 +281,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       </svg>
     );
 
-    // 히든 select 요소 추가 (form 제출용)
     const hiddenSelectInput = (
       <select
         id={id}
@@ -318,7 +302,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       </select>
     );
 
-    // 라벨 ID 생성
     const labelId = id ? `${id}-label` : undefined;
 
     return (
@@ -332,11 +315,9 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
           </label>
         )}
 
-        <div className="relative w-full" ref={dropdownRef}>
-          {/* 히든 셀렉트 (form 제출용) */}
+        <div className="relative w-full" ref={ref}>
           {hiddenSelectInput}
 
-          {/* 커스텀 셀렉트 UI */}
           <div
             className={cn(
               baseStyles,
@@ -381,7 +362,6 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
             </div>
           </div>
 
-          {/* 드롭다운 메뉴 */}
           {isOpen && (
             <div
               id={`${id || "select"}-options`}
