@@ -74,9 +74,50 @@ export interface Step2Data {
   confirmPassword: string;
 }
 
+// 매장 운영 시간 데이터
+export interface BusinessDay {
+  /**
+   * 요일
+   */
+  day: string;
+
+  /**
+   * 해당 요일에 가맹점이 운영되는지 여부
+   */
+  isOpen: boolean;
+
+    /**
+     * 매장 오픈 시간 (HH:mm)
+     */
+  openTime: string;
+
+    /**
+     * 매장 마감 시간 (HH:mm)
+     */
+  closeTime: string;
+}
+
 // 매장 정보 데이터
 export interface Step3Data {
-  // 추후 구현 예정
+  /**
+   * 가맹점 이미지 파일명
+   */
+  storeImage?: string;
+
+  /**
+   * 가맹점 이미지 URL
+   */
+  storeImageUrl?: string;
+
+  /**
+   * 가맹점 소개
+   */
+  storeDescription: string;
+
+  /**
+   * 매장 운영 시간
+   */
+  businessDays: BusinessDay[];
 }
 
 // 계좌 정보 데이터
