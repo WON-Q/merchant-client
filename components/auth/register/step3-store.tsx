@@ -238,7 +238,7 @@ export default function Step3Store({
                       매장 대표 이미지 업로드
                     </span>
                     <span className="text-sm text-gray-500">
-                      JPG, PNG 가능 (최대 5MB)
+                      JPG, PNG 가능
                     </span>
                   </div>
                 )}

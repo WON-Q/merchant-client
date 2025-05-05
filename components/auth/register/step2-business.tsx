@@ -292,7 +292,7 @@ export default function Step2Business({
                     <Upload className="h-12 w-12 mb-6 text-[#FF6B35]" />
                     <span className="text-xl mb-3">사업자 등록증 업로드</span>
                     <span className="text-sm text-gray-500">
-                      PDF, JPG, PNG 가능 (최대 3MB)
+                      PDF, JPG, PNG 가능
                     </span>
                   </div>
                 )}
