@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -26,6 +26,8 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/dashboard"; // 미들웨어에서 설정한 리디렉션 경로 가져오기
   const [credentialError, setCredentialError] = useState<string | null>(null);
 
   // useAuth 커스텀 훅 사용
@@ -55,7 +57,10 @@ export default function LoginPage() {
     try {
       const result = await login(data.accountId, data.password);
 
-      if (!result.success) {
+      if (result.success) {
+        // 로그인 성공 시 리디렉션 경로로 이동
+        router.push(redirect);
+      } else {
         // 로그인 실패 시 자격 증명 오류 설정
         setCredentialError(result.errorMessage || "로그인에 실패했습니다.");
 
