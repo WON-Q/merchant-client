@@ -26,7 +26,14 @@ export function useAuth() {
    */
   const saveToken = (token: string): void => {
     try {
+      // localStorage에 저장
       localStorage.setItem("token", token);
+
+      // 쿠키에도 저장 (middleware에서 사용)
+      document.cookie = `auth-token=${token}; path=/; max-age=${
+        60 * 60 * 24 * 7
+      }`; // 7일 유효
+
       setIsAuthenticated(true);
 
     } catch (error) {
@@ -39,7 +46,12 @@ export function useAuth() {
    */
   const removeToken = (): void => {
     try {
+      // localStorage에서 토큰 제거
       localStorage.removeItem("token");
+
+      // 쿠키에서도 토큰 제거
+      document.cookie = "auth-token=; path=/; max-age=0"; // 즉시 만료
+
       setIsAuthenticated(false);
 
     } catch (error) {
