@@ -8,8 +8,12 @@ import { MenuTabs } from "@/components/dashboard/menu/MenuTabs";
 import { useGetMenuList } from "@/hooks/api/dashboard/menu/useGetMenuList";
 import { useManageMenu } from "@/hooks/api/dashboard/menu/useManageMenu";
 import { useMerchantContext } from "@/contexts/MerchantContext";
-import { GetMenuResponseDto } from "@/app/api/dashboard/menu/route";
+import {
+  CreateMenuRequestDto,
+  GetMenuResponseDto,
+} from "@/app/api/dashboard/menu/route";
 import { extractMenuCategories } from "@/lib/utils";
+import CreateNewMenuModal from "@/components/dashboard/menu/modal/CreateNewMenuModal";
 
 /**
  * 메뉴 관리 페이지 컴포넌트
@@ -27,15 +31,17 @@ export default function MenuPage() {
     isUpdating,
     isDeleting,
     isDuplicating,
-    error: manageError, // 이 변수를 아래에서 사용하도록 수정
+    error: manageError,
     toggleAvailability,
     duplicateMenu,
     deleteMenu,
+    createMenu,
   } = useManageMenu();
 
   // 상태 관리
   const [activeTab, setActiveTab] = useState("all");
   const [menuItems, setMenuItems] = useState<GetMenuResponseDto[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 통합된 로딩 상태
   const isLoading = isUpdating || isDeleting || isDuplicating || isCreating;
@@ -144,6 +150,31 @@ export default function MenuPage() {
     }
   };
 
+  /**
+   * 메뉴 추가 모달 열기
+   */
+  const handleOpenCreateNewMenuModal = () => {
+    setIsModalOpen(true);
+  };
+
+  /**
+   * 새 메뉴 생성 핸들러
+   */
+  const handleCreateMenu = async (menuData: CreateMenuRequestDto) => {
+    try {
+      const result = await createMenu(menuData);
+
+      if (result.success && result.data) {
+        setMenuItems((prevItems) => [
+          ...prevItems,
+          result.data as GetMenuResponseDto,
+        ]);
+      }
+    } catch (error) {
+      console.error("메뉴 생성 중 오류:", error);
+    }
+  };
+
   // 로딩 상태 표시
   if (isLoadingMenus) {
     return (
@@ -197,6 +228,7 @@ export default function MenuPage() {
               size="md"
               variant="primary"
               rightIcon={<Plus className="h-4 w-4" />}
+              onClick={handleOpenCreateNewMenuModal}
               disabled={isCreating}
             >
               메뉴 추가
@@ -232,6 +264,13 @@ export default function MenuPage() {
             </div>
           </div>
         </div>
+
+        {/* 메뉴 추가 모달 */}
+        <CreateNewMenuModal
+          isOpen={isModalOpen}
+          onCloseAction={() => setIsModalOpen(false)}
+          onCreateMenuAction={handleCreateMenu}
+        />
       </div>
     </div>
   );
