@@ -7,15 +7,39 @@ import { cn } from "@/lib/utils";
 import { HelpSection } from "@/components/dashboard/HelpSection";
 import { UserProfileDropdown } from "@/components/dashboard/UserProfileDropdown";
 import { DASHBOARD_ROUTES } from "@/constants/dashboard";
+import {
+  MerchantProvider,
+  useMerchantContext,
+} from "@/contexts/MerchantContext";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
+  return (
+    <MerchantProvider>
+      <DashboardContent>{children}</DashboardContent>
+    </MerchantProvider>
+  );
+}
 
-  // 인증된 사용자에게 대시보드 표시
+function DashboardContent({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const { merchantInfo, error } = useMerchantContext();
+
+  if (error) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mb-4 text-3xl font-bold text-[#FF6B35]">원큐오더</div>
+          <div className="text-lg text-red-500">오류가 발생했습니다</div>
+          <div className="mt-2">{error}</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-white px-4 shadow-sm md:px-6">
@@ -24,7 +48,10 @@ export default function DashboardLayout({
         </Link>
 
         <div className="flex items-center gap-4">
-          <UserProfileDropdown userName="테스트" userEmail="test@test.com" />
+          <UserProfileDropdown
+            userName={merchantInfo?.merchantOwnerName || "사장님"}
+            userEmail={merchantInfo?.merchantName || "가맹점"}
+          />
         </div>
       </header>
 
@@ -33,7 +60,7 @@ export default function DashboardLayout({
           <div className="flex h-full flex-col overflow-y-auto p-4">
             <nav className="grid gap-2 text-sm">
               {DASHBOARD_ROUTES.map((route) => {
-                const Icon = route.icon; // 동적으로 아이콘 컴포넌트 렌더링
+                const Icon = route.icon;
                 return (
                   <Link
                     key={route.path}
