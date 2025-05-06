@@ -25,3 +25,13 @@ export function extractMenuCategories(menuItems: GetMenuResponseDto[]): string[]
     return ["전체"];
   }
 }
+
+/**
+ * 메뉴 아이템의 가격을 포맷팅하는 함수
+ *
+ * @param price 가격 (정수)
+ * @returns 포맷된 가격 문자열
+ */
+export function formatPrice(price: number): string {
+  return new Intl.NumberFormat("ko-KR").format(price) + "원";
+}
