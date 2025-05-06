@@ -146,11 +146,11 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     const sizeStyles = {
       xs: "max-w-xs",
       sm: "max-w-sm",
-      md: "max-w-md",
-      lg: "max-w-lg",
-      xl: "max-w-xl",
-      "2xl": "max-w-2xl",
-      full: "max-w-full mx-4",
+      md: "max-w-2xl",
+      lg: "max-w-3xl",
+      xl: "max-w-4xl",
+      "2xl": "max-w-5xl",
+      full: "max-w-full mx-6",
     };
 
     // 오버레이 클릭 이벤트
@@ -164,10 +164,10 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     return (
       <div
         className={cn(
-          "fixed inset-0 z-50 flex overflow-auto",
+          "fixed inset-0 z-50 flex overflow-auto p-4 md:p-6",
           centered
             ? "items-center justify-center"
-            : "items-start justify-center pt-10",
+            : "items-start justify-center pt-16",
           blur ? "backdrop-blur-sm" : "",
           className
         )}
@@ -180,7 +180,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       >
         {/* 배경 오버레이 */}
         <div
-          className="fixed inset-0 bg-black/50"
+          className="fixed inset-0 bg-black/60"
           onClick={handleOverlayClick}
           aria-hidden="true"
         />
@@ -188,7 +188,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
         {/* 모달 컨텐츠 */}
         <div
           className={cn(
-            "relative z-50 w-full bg-white shadow-xl rounded-lg",
+            "relative z-50 w-full bg-white shadow-xl rounded-xl",
             sizeStyles[size],
             "flex flex-col"
           )}
@@ -196,32 +196,32 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
         >
           {/* 모달 헤더 */}
           {(title || showCloseButton) && (
-            <div className="flex items-center justify-between p-4 border-b border-neutral-100">
+            <div className="flex items-center justify-between p-6 border-b border-neutral-200">
+              {" "}
               {title && (
                 <div>
                   <h2
                     id="modal-title"
-                    className="text-lg font-semibold text-neutral-900"
+                    className="text-xl font-semibold text-neutral-900"
                   >
                     {title}
                   </h2>
                   {description && (
                     <p
                       id="modal-description"
-                      className="text-sm text-neutral-500 mt-1"
+                      className="text-base text-neutral-500 mt-1.5"
                     >
                       {description}
                     </p>
                   )}
                 </div>
               )}
-
               {showCloseButton && (
                 <Button
                   variant="ghost"
                   size="sm"
                   shape="pill"
-                  className="p-1 h-auto text-neutral-500 hover:text-neutral-900 -mr-1"
+                  className="p-2 h-auto text-neutral-400 hover:text-neutral-900"
                   onClick={onClose}
                   aria-label="Close"
                 >
@@ -234,9 +234,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           {/* 모달 본문 */}
           <div
             className={cn(
-              "p-4",
-              scrollable ? "overflow-y-auto" : "",
-              !footer ? "rounded-b-lg" : ""
+              "p-6",
+              scrollable ? "overflow-y-auto max-h-[calc(100vh-16rem)]" : "",
+              !footer ? "rounded-b-xl" : ""
             )}
           >
             {children}
@@ -244,7 +244,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
           {/* 모달 푸터 */}
           {footer && (
-            <div className="flex items-center justify-end gap-3 p-4 border-t border-neutral-100">
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-neutral-200">
+              {" "}
               {footer}
             </div>
           )}
