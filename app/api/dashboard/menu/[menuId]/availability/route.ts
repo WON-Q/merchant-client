@@ -94,7 +94,13 @@ export async function PATCH(
     }
 
     const data: ApiResponse<MenuStatusResponseDto> = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(
+      {
+        success: true,
+        data: data.data,
+      },
+      { status: 200 }
+    );
 
   } catch (error: unknown) {
     console.error("메뉴 상태 변경 중 오류 발생:", error);

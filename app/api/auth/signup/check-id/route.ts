@@ -60,7 +60,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     }
 
     const data: ApiResponse<CheckDuplicateIdResponseDto> = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(
+      {
+        success: true,
+        data: data.data,
+      },
+      { status: 200 }
+    );
 
   } catch (error: unknown) {
     console.error("아이디 중복 확인 중 오류 발생:", error);
