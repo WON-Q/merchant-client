@@ -15,6 +15,15 @@ export interface MerchantInfoResponse {
   merchantAccountHolderName: string; // 가맹점 계좌 예금주 이름
 }
 
+// 가맹점 정보 수정 요청 DTO
+export interface MerchantInfoUpdateRequest {
+  merchantOwnerPhoneNo?: string; // 가맹점 대표자 전화번호
+  description?: string; // 가맹점 설명
+  merchantAccountBankName?: string; // 가맹점 계좌 은행 이름
+  merchantAccount?: string; // 가맹점 계좌 번호
+  merchantAccountHolderName?: string; // 가맹점 계좌 예금주 이름
+}
+
 /**
  * 가맹점 기본 정보 조회 API
  */
@@ -90,6 +99,128 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       {
         success: false,
         message: `가맹점 정보 조회 중 오류: ${errorMessage}`,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * 가맹점 기본 정보 수정 API
+ */
+export async function PATCH(request: NextRequest): Promise<NextResponse> {
+  try {
+    // 인증 토큰 가져오기
+    const authToken = request.cookies.get("auth-token")?.value;
+
+    if (!authToken) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "인증 정보가 없습니다.",
+        },
+        { status: 401 }
+      );
+    }
+
+    // 요청 본문 가져오기
+    const updateData: MerchantInfoUpdateRequest = await request.json();
+
+    // 최소 하나의 필드가 있는지 검증
+    if (
+      !updateData.merchantOwnerPhoneNo &&
+      !updateData.description &&
+      !updateData.merchantAccountBankName &&
+      !updateData.merchantAccount &&
+      !updateData.merchantAccountHolderName
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "최소 하나 이상의 필드가 필요합니다.",
+        },
+        { status: 400 }
+      );
+    }
+
+    // 계좌 정보를 수정하는 경우 모든 계좌 관련 필드가 있는지 검증
+    if (
+      (updateData.merchantAccountBankName ||
+        updateData.merchantAccount ||
+        updateData.merchantAccountHolderName) &&
+      !(
+        updateData.merchantAccountBankName &&
+        updateData.merchantAccount &&
+        updateData.merchantAccountHolderName
+      )
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "계좌 정보를 수정할 경우, 은행명, 계좌번호, 예금주명을 모두 입력해주세요.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/merchant/info`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateData),
+      }
+    );
+
+    if (!response.ok) {
+      let errorResponse: ErrorResponse | null = null;
+
+      try {
+        const json = await response.json();
+        errorResponse = json as ErrorResponse;
+
+      } catch (e) {
+        console.error("에러 응답 파싱 실패:", e);
+      }
+
+      // 에러 응답에서 validation 메시지 추출
+      const validationMessage = errorResponse?.validation && Object.keys(errorResponse?.validation).length > 0
+        ? Object.values(errorResponse?.validation).join(", ")
+        : "";
+
+      // errorMessage와 validationMessage를 결합해 가맹점 정보 수정 실패 메시지 생성
+      const fullMessage = [errorResponse?.errorMessage, validationMessage]
+        .filter(Boolean)
+        .join(" - ");
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: fullMessage || `가맹점 정보 수정 실패: ${response.statusText}`,
+        },
+        { status: response.status }
+      );
+    }
+
+    const data: ApiResponse<MerchantInfoResponse> = await response.json();
+    return NextResponse.json(data);
+
+  } catch (error: unknown) {
+    console.error("가맹점 정보 수정 중 오류 발생:", error);
+
+    let errorMessage = "알 수 없는 오류가 발생했습니다.";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: `가맹점 정보 수정 중 오류: ${errorMessage}`,
       },
       { status: 500 }
     );
