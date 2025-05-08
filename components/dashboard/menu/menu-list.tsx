@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
-import { MenuItemCard } from "./MenuItemCard";
-import { Pagination } from "@/components/ui/Pagination";
+import { MenuItemCard } from "./menu-item-card";
+import { Pagination } from "@/components/ui/pagination";
 import { GetMenuResponseDto } from "@/app/api/dashboard/menu/route";
 
 interface MenuListProps {

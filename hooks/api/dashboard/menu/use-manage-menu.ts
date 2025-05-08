@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useCreateMenu } from "./useCreateMenu";
-import { useDeleteMenu } from "./useDeleteMenu";
-import { useDuplicateMenu } from "./useDuplicateMenu";
-import { useUpdateMenuAvailability } from "./useUpdateMenuAvailability";
+import { useCreateMenu } from "./use-create-menu";
+import { useDeleteMenu } from "./use-delete-menu";
+import { useDuplicateMenu } from "./use-duplicate-menu";
+import { useUpdateMenuAvailability } from "./use-update-menu-availability";
 import {
   GetMenuResponseDto,
   CreateMenuRequestDto,

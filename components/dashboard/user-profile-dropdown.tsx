@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LogOut, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/hooks/api/auth/useAuth";
+import { useAuth } from "@/hooks/api/auth/use-auth";
 
 interface UserProfileDropdownProps {
   userName: string;

@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Modal } from "@/components/ui/Modal";
-import { Button } from "@/components/ui/Button";
+import { Modal } from "@/components/ui/modal";
+import { Button } from "@/components/ui/button";
 import {
   MenuOptionGroup,
   CreateMenuRequestDto,
 } from "@/app/api/dashboard/menu/route";
-import { useMenuImageUpload } from "@/hooks/api/dashboard/menu/useMenuImageUpload";
+import { useMenuImageUpload } from "@/hooks/api/dashboard/menu/use-menu-image-upload";
 
-import MenuInfoEditor from "./MenuInfoEditor";
-import MenuOptionEditor from "./MenuOptionEditor";
+import MenuInfoEditor from "./menu-info-editor";
+import MenuOptionEditor from "./menu-option-editor";
 
 interface CreateNewMenuModalProps {
   /**

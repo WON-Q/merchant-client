@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Save } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { MerchantInfo } from "@/components/dashboard/settings/merchant-info";
 import { AccountInfo } from "@/components/dashboard/settings/account-info";
 import { MerchantInfoUpdateRequest } from "@/app/api/merchant/route";
-import { useMerchantInfo } from "@/hooks/api/dashboard/useMerchantInfo";
+import { useMerchantInfo } from "@/hooks/api/dashboard/use-merchant-info";
 
 /**
  * 가맹점 정보 설정 페이지

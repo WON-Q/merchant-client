@@ -4,7 +4,7 @@ import {
   SignupRequestDto,
   SignupResponseDto,
 } from "@/app/api/auth/signup/route";
-import { useSignupDataTransform } from "../../transform/useSignupDataTransform";
+import { useSignupDataTransform } from "../../transform/use-signup-data-transform";
 import { HookResponse } from "@/types/hook";
 import { ApiResponse, ErrorResponse } from "@/types/api";
 

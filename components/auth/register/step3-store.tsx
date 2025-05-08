@@ -4,13 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowLeft, ArrowRight, Check, Clock, Upload } from "lucide-react";
 
-import { Button } from "@/components/ui/Button";
-import { Switch } from "@/components/ui/Switch";
-import { Dropdown } from "@/components/ui/Dropdown";
-import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Dropdown } from "@/components/ui/dropdown";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu-item";
 import { BusinessDay, RegisterFormData, Step3Data } from "@/types/register";
 import StepContainer from "./step-container";
-import { useMerchantImageUpload } from "@/hooks/api/register/useMerchantImageUpload";
+import { useMerchantImageUpload } from "@/hooks/api/register/use-merchant-image-upload";
 import {
   BUSINESS_DAYS,
   getDefaultBusinessDays,

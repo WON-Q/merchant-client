@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, ReactNode } from "react";
-import { useMerchantInfo } from "@/hooks/api/dashboard/useMerchantInfo";
+import { useMerchantInfo } from "@/hooks/api/dashboard/use-merchant-info";
 import { MerchantInfoResponse } from "@/app/api/merchant/route";
 import { HookResponse } from "@/types/hook";
 

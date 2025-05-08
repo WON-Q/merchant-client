@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 
 import StepContainer from "./step-container";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { RegisterFormData } from "@/types/register";
 import { getBankNameByCode } from "@/constants/banks";
 

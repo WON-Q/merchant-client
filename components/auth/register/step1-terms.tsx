@@ -2,8 +2,8 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Shield } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import StepContainer from "./step-container";
-import { Button } from "@/components/ui/Button";
-import { Checkbox } from "@/components/ui/Checkbox";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { RegisterFormData, Step1Data } from "@/types/register";
 
 interface Step1Props {
