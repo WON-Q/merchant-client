@@ -67,7 +67,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     // 성공적인 응답 처리
     const data: ApiResponse<MenuImageUploadResponseDto> = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(
+      {
+        success: true,
+        data: data.data,
+      },
+      { status: 200 }
+    );
 
   } catch (error: unknown) {
     console.error("메뉴 이미지 업로드 중 오류 발생:", error);

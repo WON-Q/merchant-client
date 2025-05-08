@@ -234,7 +234,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
 
     const data: ApiResponse<CreateMenuResponseDto> = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(
+      {
+        success: true,
+        data: data.data,
+      },
+      { status: 200 }
+    );
 
   } catch (error: unknown) {
     console.error("메뉴 등록 중 오류 발생:", error);
@@ -328,7 +334,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     }
 
     const data: ApiResponse<GetMenuResponseDto[]> = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(
+      {
+        success: true,
+        data: data.data,
+      },
+      { status: 200 }
+    );
 
   } catch (error: unknown) {
     console.error("메뉴 목록 조회 중 오류 발생:", error);

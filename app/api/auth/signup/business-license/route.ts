@@ -66,7 +66,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
 
     const data: ApiResponse<BusinessRegistrationOcrResponseDto> = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(
+      {
+        success: true,
+        data: data.data,
+      },
+      { status: 200 }
+    );
     
   } catch (error: unknown) {
     console.error("OCR 처리 중 오류 발생:", error);

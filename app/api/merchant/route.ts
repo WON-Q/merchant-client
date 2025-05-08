@@ -85,7 +85,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     }
 
     const data: ApiResponse<MerchantInfoResponse> = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(
+      {
+        success: true,
+        data: data.data,
+      },
+      { status: 200 }
+    );
 
   } catch (error: unknown) {
     console.error("가맹점 정보 조회 중 오류 발생:", error);
