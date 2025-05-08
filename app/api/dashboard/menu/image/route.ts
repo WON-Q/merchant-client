@@ -24,6 +24,18 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       );
     }
 
+    // 파일 타입 검증
+    const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+    if (!validTypes.includes(file.type)) {
+      return NextResponse.json(
+        {
+          success: false,
+          errorMessage: "JPG, PNG, GIF, WEBP 파일만 업로드 가능합니다.",
+        },
+        { status: 400 }
+      );
+    }
+
     const uploadFormData = new FormData();
     uploadFormData.append("file", file);
 
