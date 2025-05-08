@@ -176,6 +176,8 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
       }
     );
 
+    console.log("가맹점 정보 수정 응답:", response);
+
     if (!response.ok) {
       let errorResponse: ErrorResponse | null = null;
 
@@ -207,7 +209,13 @@ export async function PATCH(request: NextRequest): Promise<NextResponse> {
     }
 
     const data: ApiResponse<MerchantInfoResponse> = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json(
+      {
+        success: true,
+        data: data.data,
+      },
+      { status: 200 }
+    );
 
   } catch (error: unknown) {
     console.error("가맹점 정보 수정 중 오류 발생:", error);
