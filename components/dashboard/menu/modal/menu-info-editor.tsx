@@ -2,9 +2,9 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Switch } from "@/components/ui/Switch";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import { HookResponse } from "@/types/hook";
 import { MenuImageUploadResponseDto } from "@/app/api/dashboard/menu/image/route";
 

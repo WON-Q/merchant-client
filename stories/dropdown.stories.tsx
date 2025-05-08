@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Dropdown, DropdownProps } from "@/components/ui/Dropdown";
-import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
+import { Dropdown, DropdownProps } from "@/components/ui/dropdown";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu-item";
 import {
   Bell,
   Calendar,

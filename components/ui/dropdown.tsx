@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown } from "lucide-react";
-import { DropdownMenuItemProps } from "./DropdownMenuItem";
+import { DropdownMenuItemProps } from "./dropdown-menu-item";
 
 export interface DropdownProps {
   /**

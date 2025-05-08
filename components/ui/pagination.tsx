@@ -6,7 +6,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
-import { Button } from "./Button";
+import { Button } from "./button";
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

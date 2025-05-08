@@ -2,18 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { MenuList } from "@/components/dashboard/menu/MenuList";
-import { MenuTabs } from "@/components/dashboard/menu/MenuTabs";
-import { useGetMenuList } from "@/hooks/api/dashboard/menu/useGetMenuList";
-import { useManageMenu } from "@/hooks/api/dashboard/menu/useManageMenu";
-import { useMerchantContext } from "@/contexts/MerchantContext";
+import { Button } from "@/components/ui/button";
+import { MenuList } from "@/components/dashboard/menu/menu-list";
+import { MenuTabs } from "@/components/dashboard/menu/menu-tabs";
+import { useGetMenuList } from "@/hooks/api/dashboard/menu/use-get-menu-list";
+import { useManageMenu } from "@/hooks/api/dashboard/menu/use-manage-menu";
+import { useMerchantContext } from "@/contexts/merchant-context";
 import {
   CreateMenuRequestDto,
   GetMenuResponseDto,
 } from "@/app/api/dashboard/menu/route";
 import { extractMenuCategories } from "@/lib/utils";
-import CreateNewMenuModal from "@/components/dashboard/menu/modal/CreateNewMenuModal";
+import CreateNewMenuModal from "@/components/dashboard/menu/modal/create-new-menu-modal";
 
 /**
  * 메뉴 관리 페이지 컴포넌트

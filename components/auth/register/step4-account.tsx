@@ -3,14 +3,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowLeft, ArrowRight, CreditCard } from "lucide-react";
 
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Dropdown } from "@/components/ui/Dropdown";
-import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Dropdown } from "@/components/ui/dropdown";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu-item";
 import { RegisterFormData, Step4Data } from "@/types/register";
 import StepContainer from "./step-container";
 import { KOREAN_BANKS } from "@/constants/banks";
-import { useSignup } from "@/hooks/api/register/useSignup";
+import { useSignup } from "@/hooks/api/register/use-signup";
 
 interface Step4Props {
   onNext: (data: Step4Data) => void;

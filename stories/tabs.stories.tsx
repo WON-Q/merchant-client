@@ -7,8 +7,8 @@ import {
   House,
   Settings,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 // Storybook 메타 정의
 const meta = {

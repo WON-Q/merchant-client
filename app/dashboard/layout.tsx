@@ -4,13 +4,13 @@ import type React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { HelpSection } from "@/components/dashboard/HelpSection";
-import { UserProfileDropdown } from "@/components/dashboard/UserProfileDropdown";
+import { HelpSection } from "@/components/dashboard/help-section";
+import { UserProfileDropdown } from "@/components/dashboard/user-profile-dropdown";
 import { DASHBOARD_ROUTES } from "@/constants/dashboard";
 import {
   MerchantProvider,
   useMerchantContext,
-} from "@/contexts/MerchantContext";
+} from "@/contexts/merchant-context";
 
 export default function DashboardLayout({
   children,

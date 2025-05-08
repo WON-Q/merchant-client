@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Copy, Edit, Trash } from "lucide-react";
-import { Switch } from "@/components/ui/Switch";
-import { Button } from "@/components/ui/Button";
+import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
 import { GetMenuResponseDto } from "@/app/api/dashboard/menu/route";
 import { formatPrice } from "@/lib/utils";
 

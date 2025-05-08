@@ -1,7 +1,7 @@
 import React from "react";
-import { Input } from "@/components/ui/Input";
-import { Dropdown } from "@/components/ui/Dropdown";
-import { DropdownMenuItem } from "@/components/ui/DropdownMenuItem";
+import { Input } from "@/components/ui/input";
+import { Dropdown } from "@/components/ui/dropdown";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu-item";
 import { KOREAN_BANKS } from "@/constants/banks";
 
 interface AccountInfoProps {
