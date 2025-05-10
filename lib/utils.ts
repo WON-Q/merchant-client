@@ -1,6 +1,8 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { GetMenuResponseDto } from "@/app/api/dashboard/menu/route";
+import { format } from "date-fns";
+import { ko } from "date-fns/locale";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -34,4 +36,24 @@ export function extractMenuCategories(menuItems: GetMenuResponseDto[]): string[]
  */
 export function formatPrice(price: number): string {
   return new Intl.NumberFormat("ko-KR").format(price) + "원";
+}
+
+/**
+ * 날짜를 포맷팅하는 함수
+ *
+ * @param dateString 날짜 문자열
+ * @param formatString 원하는 포맷 (기본값: "yyyy년 MM월 dd일 HH:mm:ss")
+ * @returns 포맷된 날짜 문자열
+ */
+export function formatKoreanDateTime(
+  dateString: string,
+  formatString: string = "yyyy년 MM월 dd일 HH:mm:ss"
+): string {
+  try {
+    const date = new Date(dateString);
+    return format(date, formatString, { locale: ko });
+
+  } catch {
+    return dateString;
+  }
 }

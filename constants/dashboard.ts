@@ -5,6 +5,7 @@ import {
   QrCode,
   Settings,
   ShoppingBag,
+  History,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -39,6 +40,11 @@ export const DASHBOARD_ROUTES: DashboardRoute[] = [
     name: "메뉴 관리",
     path: "/dashboard/menu",
     icon: ShoppingBag,
+  },
+  {
+    name: "로그인 이력",
+    path: "/dashboard/login-history",
+    icon: History,
   },
   {
     name: "설정",
