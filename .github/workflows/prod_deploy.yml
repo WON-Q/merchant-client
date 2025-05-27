@@ -49,8 +49,8 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            asia-northeast3-docker.pkg.dev/northern-window-458205-h4/fisa/wonq-merchant-client:${{ github.event.release.tag_name }}
-            asia-northeast3-docker.pkg.dev/northern-window-458205-h4/fisa/wonq-merchant-client:latest
+            asia-northeast3-docker.pkg.dev/northern-window-458205-h4/fisa/wonq-order-merchant-client:${{ github.event.release.tag_name }}
+            asia-northeast3-docker.pkg.dev/northern-window-458205-h4/fisa/wonq-order-merchant-client:latest
 
       - name: Slack 알림 (실패 시)
         uses: 8398a7/action-slack@v3
@@ -73,7 +73,7 @@ jobs:
 
       - name: 이미지 버전 업데이트
         run: |
-          sed -i 's|asia-northeast3-docker.pkg.dev/northern-window-458205-h4/fisa/wonq-merchant-client.*|asia-northeast3-docker.pkg.dev/northern-window-458205-h4/fisa/wonq-merchant-client:${{ github.event.release.tag_name }}|' ./manifests/dev/wonq-order/deployment.yml
+          sed -i 's|asia-northeast3-docker.pkg.dev/northern-window-458205-h4/fisa/wonq-order-merchant-client.*|asia-northeast3-docker.pkg.dev/northern-window-458205-h4/fisa/wonq-order-merchant-client:${{ github.event.release.tag_name }}|' ./manifests/dev/wonq-order/deployment.yml
 
       - name: 변경사항 커밋 및 푸시
         run: |
