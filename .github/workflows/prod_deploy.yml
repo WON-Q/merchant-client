@@ -80,7 +80,7 @@ jobs:
           git config --global user.name "${{ secrets.GIT_USER_NAME }}"
           git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
           git add ./manifests/wonq-order/deployment.yml
-          git commit -m "update: wonq-merchant-client 이미지 버전 수정 v${{ github.event.release.tag_name }} by GitHub Actions"
+          git commit -m "Update: wonq-merchant-client 이미지 버전 수정 v${{ github.event.release.tag_name }} by GitHub Actions"
           git push
 
       - name: Slack 알림 (실패 시)
