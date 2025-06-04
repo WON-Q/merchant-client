@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { HelpSection } from "@/components/dashboard/help-section";
 import { UserProfileDropdown } from "@/components/dashboard/user-profile-dropdown";
 import { DASHBOARD_ROUTES } from "@/constants/dashboard";
+import { NotificationDropdown} from "@/components/dashboard/NotificationDropdown";
+import { DashboardDayBanner } from "@/components/dashboard/DashboardDayBanner";
 import {
   MerchantProvider,
   useMerchantContext,
@@ -42,12 +44,18 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-white px-4 shadow-sm md:px-6">
+      <header className="sticky top-0 z-30 flex h-18 items-center justify-between border-b bg-white px-4 shadow-sm md:px-6">
         <Link href="/dashboard" className="hidden items-center gap-2 md:flex">
           <span className="text-xl font-bold text-[#FF6B35]">원큐오더</span>
+          
         </Link>
 
+         
+
         <div className="flex items-center gap-4">
+       
+          <DashboardDayBanner />
+         <NotificationDropdown />
           <UserProfileDropdown
             userName={merchantInfo?.merchantOwnerName || "사장님"}
             userEmail={merchantInfo?.merchantName || "가맹점"}
@@ -66,7 +74,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
                     key={route.path}
                     href={route.path}
                     className={cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-neutral-50",
+                      "flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-neutral-50 text-xl",
                       pathname === route.path
                         ? "bg-neutral-100 text-[#FF6B35]"
                         : "text-neutral-600"

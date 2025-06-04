@@ -40,9 +40,15 @@ export default function MenuPage() {
 
   // 상태 관리
   const [activeTab, setActiveTab] = useState("all");
+  const [editTargetMenu, setEditTargetMenu] = useState<GetMenuResponseDto | null>(null);
   const [menuItems, setMenuItems] = useState<GetMenuResponseDto[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // 메뉴 수정 핸들러 - 모달 열기
+  const handleEditMenu = (menu: GetMenuResponseDto) => {
+  setEditTargetMenu(menu); // 수정할 메뉴 설정
+  setIsModalOpen(true); // 모달 열기
+};
   // 통합된 로딩 상태
   const isLoading = isUpdating || isDeleting || isDuplicating || isCreating;
 
@@ -157,6 +163,19 @@ export default function MenuPage() {
     setIsModalOpen(true);
   };
 
+  const handleUpdateMenu = (updatedMenu: GetMenuResponseDto) => {
+  setMenuItems((prevItems) =>
+    prevItems.map((item) =>
+      item.menuId === updatedMenu.menuId ? updatedMenu : item
+    )
+  );
+
+  // 모달 닫기 + 상태 초기화
+  setIsModalOpen(false);
+  setEditTargetMenu(null);
+};
+
+
   /**
    * 새 메뉴 생성 핸들러
    */
@@ -259,6 +278,7 @@ export default function MenuPage() {
                 onToggleAvailability={handleToggleAvailability}
                 onDuplicateMenu={handleItemCardDuplicate}
                 onDeleteMenu={handleDeleteMenu}
+                onEditMenu={handleEditMenu}
                 isLoading={isLoading}
               />
             </div>
@@ -266,10 +286,16 @@ export default function MenuPage() {
         </div>
 
         {/* 메뉴 추가 모달 */}
-        <CreateNewMenuModal
+       <CreateNewMenuModal
           isOpen={isModalOpen}
-          onCloseAction={() => setIsModalOpen(false)}
+          onCloseAction={() => {
+            setIsModalOpen(false);
+            setEditTargetMenu(null); // 닫을 때 초기화
+          }}
           onCreateMenuAction={handleCreateMenu}
+          onEditMenuAction={handleUpdateMenu}
+          editMenuData={editTargetMenu}
+  
         />
       </div>
     </div>

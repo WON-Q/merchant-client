@@ -17,6 +17,9 @@ export interface MenuOptionGroup {
   options: MenuOption[]; // 옵션 목록
 }
 
+
+
+
 // 메뉴 생성 요청 DTO
 export interface CreateMenuRequestDto {
   menuImgUrl: string; // 메뉴 이미지 URL

@@ -45,19 +45,23 @@ export default function Step5Complete({ formData }: Step5Props) {
               <Check className="h-12 w-12 text-white stroke-[2.5]" />
             </div>
 
-            {/* 타이틀과 설명 */}
+          {/* 타이틀과 설명 */}
             <div className="text-left">
               <h2 className="text-2xl sm:text-3xl font-bold mb-3">
-                회원가입 완료!
+                회원가입 신청 완료!
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-2">
                 가맹점 등록이 성공적으로 완료되었습니다.
                 <br />
-                입력하신 정보로{" "}
-                <span className="font-medium text-[#FF6B35]">즉시 로그인</span>
+                관리자의 승인 후{" "}
+                <span className="font-medium text-[#FF6B35]">로그인</span>
                 하여 서비스를 이용하실 수 있습니다.
               </p>
+             <p className="text-sm text-gray-500">
+  ※ 승인 완료 시 안내 문자가 발송됩니다.
+</p>
             </div>
+
           </div>
 
           {/* 정보 요약 카드 */}
