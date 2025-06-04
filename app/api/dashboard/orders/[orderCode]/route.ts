@@ -56,7 +56,7 @@ export async function GET(
     }
 
     // 주문 코드 가져오기
-    const { orderCode } = params;
+    const { orderCode } = await params;
 
     if (!orderCode) {
       return NextResponse.json(
