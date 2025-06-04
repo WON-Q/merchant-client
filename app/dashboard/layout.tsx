@@ -7,12 +7,13 @@ import { cn } from "@/lib/utils";
 import { HelpSection } from "@/components/dashboard/help-section";
 import { UserProfileDropdown } from "@/components/dashboard/user-profile-dropdown";
 import { DASHBOARD_ROUTES } from "@/constants/dashboard";
-import { NotificationDropdown} from "@/components/dashboard/NotificationDropdown";
+import { NotificationDropdown } from "@/components/dashboard/NotificationDropdown";
 import { DashboardDayBanner } from "@/components/dashboard/DashboardDayBanner";
 import {
   MerchantProvider,
   useMerchantContext,
 } from "@/contexts/merchant-context";
+import { WebSocketProvider } from "@/contexts/websocket-context";
 
 export default function DashboardLayout({
   children,
@@ -21,7 +22,9 @@ export default function DashboardLayout({
 }) {
   return (
     <MerchantProvider>
-      <DashboardContent>{children}</DashboardContent>
+      <WebSocketProvider>
+        <DashboardContent>{children}</DashboardContent>
+      </WebSocketProvider>
     </MerchantProvider>
   );
 }
@@ -47,15 +50,11 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-30 flex h-18 items-center justify-between border-b bg-white px-4 shadow-sm md:px-6">
         <Link href="/dashboard" className="hidden items-center gap-2 md:flex">
           <span className="text-xl font-bold text-[#FF6B35]">원큐오더</span>
-          
         </Link>
 
-         
-
         <div className="flex items-center gap-4">
-       
           <DashboardDayBanner />
-         <NotificationDropdown />
+          <NotificationDropdown />
           <UserProfileDropdown
             userName={merchantInfo?.merchantOwnerName || "사장님"}
             userEmail={merchantInfo?.merchantName || "가맹점"}
