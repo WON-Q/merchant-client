@@ -1,6 +1,12 @@
   // File: app/api/dashboard/tables/route.ts
   import { NextResponse, NextRequest } from "next/server";
 
+  interface TableOrder {
+    orderCode: string;
+    totalAmount: number;
+    paymentTransactionId: string;
+  }
+
   interface DiningTable {
     diningTableId: number;
     tableNumber: number;
@@ -10,7 +16,7 @@
     locationY: number;
     locationW: number;
     locationH: number;
-    orders: any[];
+    orders: TableOrder[];
   }
 
   /**
@@ -120,6 +126,7 @@
       const contentType = backendRes.headers.get("content-type") || "";
       if (!backendRes.ok || !contentType.includes("application/json")) {
         const errorText = await backendRes.text();
+
         return NextResponse.json(
           { success: false, errorMessage: `추가 실패: ${backendRes.status}`, backendError: errorText },
           { status: backendRes.status }
@@ -129,6 +136,7 @@
       // 4) 생성된 테이블 반환
       const body = await backendRes.json();
       return NextResponse.json({ success: true, data: body.data }, { status: 201 });
+
     } catch (err) {
       const msg = err instanceof Error ? err.message : "알 수 없는 오류";
       return NextResponse.json(
