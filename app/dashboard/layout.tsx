@@ -74,7 +74,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
                     key={route.path}
                     href={route.path}
                     className={cn(
-                      "flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-neutral-50 text-2xl",
+                      "flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-neutral-50 text-xl",
                       pathname === route.path
                         ? "bg-neutral-100 text-[#FF6B35]"
                         : "text-neutral-600"
