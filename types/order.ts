@@ -41,8 +41,8 @@ export enum OrderStatus {
 
 // 주문 메뉴 상태 열거형
 export enum OrderMenuStatus {
-  ORDERED = "ORDERED", // 주문됨
-  IN_PROGRESS = "IN_PROGRESS", // 처리중
+  ORDERED = "ORDERED", // 주문 완료
+  IN_PROGRESS = "IN_PROGRESS", // 진행중
   SERVED = "SERVED", // 서빙됨
   CANCELED = "CANCELED", // 취소됨
 }
@@ -50,8 +50,8 @@ export enum OrderMenuStatus {
 // 결제 상태 열거형
 export enum PaymentStatus {
   PENDING = "PENDING", // 대기중
-  COMPLETED = "COMPLETED", // 완료됨
-  FAILED = "FAILED", // 실패함
+  COMPLETED = "COMPLETED", // 승인됨
+  FAILED = "FAILED", // 결제 실패
   CANCELED = "CANCELED", // 취소됨
 }
 

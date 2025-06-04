@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"; // Tailwind class 병합 유틸
 // ✅ Dialog: 외부 className 적용 가능하게 수정
 interface DialogProps {
   open: boolean;
-  onOpenChange: () => void;
+  onOpenChange: (open: boolean) => void;
   children: ReactNode;
   className?: string; // ✅ 선택적 className
 }
@@ -16,7 +16,7 @@ export function Dialog({ open, onOpenChange, children, className }: DialogProps)
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-      onClick={onOpenChange}
+      onClick={() => onOpenChange(false)} 
     >
       <div
         onClick={(e) => e.stopPropagation()}

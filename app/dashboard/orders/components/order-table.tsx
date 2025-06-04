@@ -43,13 +43,13 @@ export function OrderTable({
       case "ORDERED":
         return (
           <Badge variant="warning" leftIcon={<Clock className="w-3 h-3" />}>
-            주문됨
+            진행중
           </Badge>
         );
       case "PAID":
         return (
           <Badge variant="primary" leftIcon={<Check className="w-3 h-3" />}>
-            결제됨
+            주문 완료
           </Badge>
         );
       case "COMPLETED":
@@ -81,13 +81,13 @@ export function OrderTable({
       case "COMPLETED":
         return (
           <Badge variant="success" leftIcon={<Check className="w-3 h-3" />}>
-            완료됨
+            승인됨
           </Badge>
         );
       case "FAILED":
         return (
           <Badge variant="error" leftIcon={<X className="w-3 h-3" />}>
-            실패함
+            결제 실패
           </Badge>
         );
       case "CANCELED":
@@ -171,9 +171,6 @@ export function OrderTable({
                     주문 시간
                   </th>
                   <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    결제 완료
-                  </th>
-                  <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     금액
                   </th>
                 </tr>
@@ -208,9 +205,7 @@ export function OrderTable({
                         <td className="px-6 py-4 text-sm text-gray-500">
                           {formatDateTime(order.createdAt)}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
-                          {order.paidAt ? formatDateTime(order.paidAt) : "-"}
-                        </td>
+                      
                         <td className="px-6 py-4 text-sm font-medium text-gray-900">
                           ₩{order.totalAmount.toLocaleString()}
                         </td>

@@ -100,7 +100,11 @@ export default function Step4Account({ onNext, onPrev, formData }: Step4Props) {
           계좌 정보 등록
         </h3>
         <p className="text-gray-500">정산을 위한 계좌 정보를 입력해주세요.</p>
+        
       </div>
+          <p className="text-m text-gray-500 mt-6">
+          ※ 일일 정산은 <span className="font-medium text-[#FF6B35]">02:00</span> 에 진행됩니다.
+        </p>
 
       <div className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm border p-6 md:p-8">
@@ -163,6 +167,7 @@ export default function Step4Account({ onNext, onPrev, formData }: Step4Props) {
             <p>{signupError}</p>
           </div>
         )}
+        
 
         <div className="flex justify-between mt-8">
           <Button

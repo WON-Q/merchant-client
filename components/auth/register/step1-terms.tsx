@@ -33,19 +33,22 @@ export default function Step1Terms({
 
   // 약관 동의 상태 변경 시 allAgreed 상태 업데이트
   useEffect(() => {
-    const { serviceTerms, privacyTerms, marketingTerms } = agreements;
+  const { serviceTerms, privacyTerms, marketingTerms } = agreements;
 
-    if (serviceTerms && privacyTerms && marketingTerms) {
-      setAgreements((prev) => ({ ...prev, allAgreed: true }));
-    } else {
-      setAgreements((prev) => ({ ...prev, allAgreed: false }));
+  const allChecked = serviceTerms && privacyTerms && marketingTerms;
+
+  setAgreements((prev) => {
+    if (prev.allAgreed !== allChecked) {
+      return { ...prev, allAgreed: allChecked };
     }
-  }, [
-    agreements.serviceTerms,
-    agreements.privacyTerms,
-    agreements.marketingTerms,
-    agreements,
-  ]);
+    return prev; // 변화 없으면 그대로 반환 (렌더링 막음)
+  });
+}, [
+  agreements.serviceTerms,
+  agreements.privacyTerms,
+  agreements.marketingTerms,
+]);
+
 
   // 모든 약관 동의 처리
   const handleAllAgree = (checked: boolean) => {

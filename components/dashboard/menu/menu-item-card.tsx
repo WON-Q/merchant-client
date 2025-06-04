@@ -161,16 +161,6 @@ export function MenuItemCard({
               수정
             </Button>
             <Button
-              variant="ghost"
-              size="sm"
-              leftIcon={<Copy className="h-4 w-4" />}
-              onClick={handleDuplicateMenu}
-              disabled={isDisabled}
-              className="hover:bg-neutral-100"
-            >
-              복제
-            </Button>
-            <Button
               variant="error"
               size="sm"
               leftIcon={<Trash className="h-4 w-4" />}

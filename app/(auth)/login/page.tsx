@@ -85,7 +85,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col bg-neutral-50">
       {/* 상단 네비게이션 */}
-      <div className="container py-4 px-4 md:px-8">
+      {/* <div className="container py-4 px-4 md:px-8">
         <Link
           href="/"
           className="inline-flex items-center text-neutral-500 hover:text-neutral-700 transition-colors"
@@ -93,7 +93,7 @@ export default function LoginPage() {
           <ArrowLeft className="mr-2 h-4 w-4" />
           홈으로 돌아가기
         </Link>
-      </div>
+      </div> */}
 
       {/* 메인 콘텐츠 */}
       <div className="flex-1 flex items-center justify-center px-4 py-8">
