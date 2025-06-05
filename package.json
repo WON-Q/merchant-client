@@ -11,6 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^5.0.1",
     "@stomp/stompjs": "^7.1.1",
     "chart.js": "^4.4.9",
