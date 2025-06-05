@@ -27,10 +27,10 @@ const year = now.getFullYear();
 const month = now.getMonth()-1; // 0-indexed (0 = 1월 ~ 11 = 12월)
 const days = getMonthDays(year, month);
 
-// 최근 3개월 정산 금액 (목데이터)
+// 최근 4개월 정산 금액 (목데이터)
 const recentSettlements = [
-  { month: `${month-2}월`, amount: 40200000 },
-  { month: `${month-1}월`, amount: 30800000 },
+  { month: `${month-2}월`, amount: 30800000 },
+  { month: `${month-1}월`, amount: 35800000 },
   { month: `${month}월`, amount: 40300000 },
   { month: `${month + 1}월`, amount: 41990960 }, // ⭐️ 현재 월로 표시
 ];
@@ -111,7 +111,7 @@ export default function SalesCalendarCard({ className }: Props) {
       <div className="flex justify-between items-center ">
         {/* 타이틀 */}
         <div className="text-2xl font-bold text-gray-900 ">
-          {activeTab === "매출" ? `${month + 1}월 매출 달력` : `${month + 1}월 정산 내역`}
+          {activeTab === "매출" ? `${month + 1}월 매출 내역` : `${month + 1}월 정산 내역`}
         </div>
     
         {/* 탭 버튼 */}
@@ -135,7 +135,7 @@ export default function SalesCalendarCard({ className }: Props) {
             </Button>
         </div>
       </div>
-<div className="w-35 border-t mb-1  "></div> 
+<div className="w-full border-t mb-1  "></div> 
 
       {/* 매출 탭 내용 */}
       {activeTab === "매출" && (
@@ -230,16 +230,16 @@ export default function SalesCalendarCard({ className }: Props) {
         <div className="mt-6 space-y-6">
           <div className="bg-white rounded-lg px-2 pt-3 pb-1 w-full ">
        {/* 정산 탭 타이틀 */}
-<div className="flex justify-center mb-5 text-gray-800 font-semibold text-[26px]">
-              {year}년 {month + 1}월
-            </div>
+        <div className="flex justify-center mb-15  text-gray-800 font-semibold text-[28px]">
+                      {year}년 {month + 1}월
+                    </div>
 
-{/* 정산 탭 요일 */}
-<div className="grid grid-cols-7 font-semibold text-center text-gray-500 text-xl mb-5">
-  {["일", "월", "화", "수", "목", "금", "토"].map((day) => (
-    <div key={day}>{day}</div>
-  ))}
-</div>
+        {/* 정산 탭 요일 */}
+        <div className="grid grid-cols-7 font-semibold text-center text-gray-500 text-xl mb-2">
+          {["일", "월", "화", "수", "목", "금", "토"].map((day) => (
+            <div key={day}>{day}</div>
+          ))}
+        </div>
 
             <div className="grid grid-cols-7 gap-2 auto-rows-auto">
               {Array(days[0].getDay())
@@ -276,8 +276,8 @@ export default function SalesCalendarCard({ className }: Props) {
           </div>
 
           {/* 최근 3개월 정산 그래프 */}
-          <div className="bg-white rounded-lg p-4 ">
-            <div className="text-base font-semibold mb-10 text-gray-800">최근 3개월 정산 금액</div>
+          <div className="bg-white rounded-lg p-4 mb-3">
+            <div className="text-xl font-bold mb-10 text-gray-800">최근 4개월 정산 금액</div>
 
             <div className="flex items-end justify-around h-44">
               {recentSettlements.map((item) => {
@@ -302,7 +302,7 @@ export default function SalesCalendarCard({ className }: Props) {
                       }}
                     ></div>
 
-                    <div className="mt-2 text-sm text-gray-700">{item.month}</div>
+                    <div className="mt-2  text-sm text-gray-900 font-bold">{item.month}</div>
                   </div>
                 );
               })}

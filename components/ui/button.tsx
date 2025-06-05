@@ -15,7 +15,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "error"
     | "outline"
     | "ghost"
-    | "link";
+    | "link"
+    |"destructive";
 
   /**
    * 버튼 크기
@@ -123,6 +124,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         "focus-visible:ring-[#22C55E]",
         "disabled:opacity-50"
       ),
+       destructive: cn(
+    "bg-[#EF4444] text-white border-transparent",
+    "hover:bg-[#DC2626] active:bg-[#B91C1C]",
+    "focus-visible:ring-[#EF4444]",
+    "disabled:opacity-50"
+  ),
       warning: cn(
         "bg-[#F59E0B] text-white border-transparent",
         "hover:bg-opacity-90 active:bg-opacity-80",
