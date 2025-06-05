@@ -34,21 +34,20 @@ export function MenuList({
   const itemsPerPage = 6; // 3x2 그리드
 
   // 카테고리 필터링 및 정렬
-  const filteredMenuItems = useMemo(() => {
-    let items;
+const filteredMenuItems = useMemo(() => {
+  let items;
 
-    if (activeTab === "all") {
-      items = menuItems;
-    } else {
-      items = menuItems.filter(
-        (item) => item.category && item.category.toLowerCase() === activeTab
-      );
-    }
+  if (activeTab === "all") {
+    items = menuItems;
+  } else {
+    items = menuItems.filter(
+      (item) => item.category && item.category.toLowerCase() === activeTab
+    );
+  }
 
-    // 이름 기준 가나다순 정렬
-    return [...items].sort((a, b) => a.name.localeCompare(b.name, "ko"));
-  }, [menuItems, activeTab]);
-
+  // 메뉴 ID 순 정렬
+  return [...items].sort((a, b) => a.menuId - b.menuId);
+}, [menuItems, activeTab]);
   // 페이지 변경 시 현재 페이지 리셋
   useEffect(() => {
     setCurrentPage(1);

@@ -53,9 +53,10 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
         </Link>
 
         <div className="flex items-center gap-4">
-          <DashboardDayBanner />
-          <NotificationDropdown />
-          <UserProfileDropdown
+           <DashboardDayBanner label="공과금 납부일" dday="D-20" />
+           <DashboardDayBanner label="식자재 납부일" dday="D-13" />
+           <NotificationDropdown />
+           <UserProfileDropdown
             userName={merchantInfo?.merchantOwnerName || "사장님"}
             userEmail={merchantInfo?.merchantName || "가맹점"}
           />

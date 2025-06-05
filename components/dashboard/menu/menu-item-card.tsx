@@ -91,7 +91,7 @@ export function MenuItemCard({
       }`}
     >
       {/* 메뉴 이미지 */}
-      <div className="relative overflow-hidden h-[150px] rounded-t-lg">
+      <div className="relative overflow-hidden aspect-[7/3] rounded-t-lg bg-neutral-200">
         <div className="absolute inset-0 bg-neutral-200" />
         {!imageError ? (
           <Image
@@ -160,6 +160,7 @@ export function MenuItemCard({
             >
               수정
             </Button>
+
             <Button
               variant="error"
               size="sm"

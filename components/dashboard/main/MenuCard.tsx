@@ -5,34 +5,34 @@ import DashboardCard from "./DashboardCard";
 import { Button } from "@/components/ui/button";
 
 const monthlyBestMenus = [
-  { name: "김치찌개", count: 120, rankChange: 1, review: "국물이 시원해요!" },
-  { name: "된장찌개", count: 95, rankChange: -1, review: "구수한 맛이에요." },
-  { name: "제육볶음", count: 80, rankChange: 0, review: "매콤한 맛이 일품!" },
-  { name: "비빔밥", count: 75, rankChange: 2, review: "야채가 신선해요." },
-  { name: "냉면", count: 60, rankChange: -2, review: "시원하게 한 그릇." },
+  { name: "짬뽕", count: 120, rankChange: 1, review: "얼큰하고 시원한 국물 맛이 일품이에요." },
+  { name: "탕수육", count: 95, rankChange: -1, review: "겉은 바삭,속은 촉촉! 소스와 완벽한 조화"},
+  { name: "멘보샤", count: 80, rankChange: 0, review:  "겉은 바삭, 새우살은 탱글탱글! 고급스러운 맛."},
+  { name: "짬짜면", count: 75, rankChange: 2, review: "두 가지 메뉴를 한 번에!  " },
+  { name: "칠리새우", count: 60, rankChange: -2, review: "매콤달콤한 소스에 새우가 정말 맛있어요."},
 ];
 
 const dailyBestMenus = [
-  { name: "김치찌개", count: 120, rankChange: 1, review: "국물이 시원해요!" },
-  { name: "된장찌개", count: 95, rankChange: -1, review: "구수한 맛이에요." },
-  { name: "제육볶음", count: 80, rankChange: 0, review: "매콤한 맛이 일품!" },
-  { name: "비빔밥", count: 75, rankChange: 2, review: "야채가 신선해요." },
-  { name: "냉면", count: 60, rankChange: -2, review: "시원하게 한 그릇." },
+  { name: "탕수육", count: 120, rankChange: 2, review: "겉은 바삭,속은 촉촉! 소스와 완벽한 조화"},
+   { name: "짬뽕", count: 95, rankChange: 1, review: "얼큰하고 시원한 국물 맛이 일품이에요." },
+  { name: "짬짜면", count: 75, rankChange: 1, review: "두 가지 메뉴를 한 번에!  " },
+    { name: "멘보샤", count: 80, rankChange: 0, review:  "겉은 바삭, 새우살은 탱글탱글! 고급스러운 맛."},
+  { name: "칠리새우", count: 60, rankChange: -2, review: "매콤달콤한 소스에 새우가 정말 맛있어요."},
 ];
 
 const monthlyWorstMenus = [
-  { name: "김치찌개", count: 120, rankChange: 1, review: "국물이 시원해요!" },
-  { name: "된장찌개", count: 95, rankChange: -1, review: "구수한 맛이에요." },
-  { name: "제육볶음", count: 80, rankChange: 0, review: "매콤한 맛이 일품!" },
-  { name: "비빔밥", count: 75, rankChange: 2, review: "야채가 신선해요." },
-  { name: "냉면", count: 60, rankChange: -2, review: "시원하게 한 그릇." },
+  { name: "망고크림중새우", count: 17, rankChange: 1, review: "조금 느끼하고 호불호가 갈릴 수 있는 메뉴" },
+  { name: "볶음밥", count: 20, rankChange: -1, review: "평범한 맛으로 임팩트가 부족한 편이에요." },
+  { name: "군만두", count: 25, rankChange: 0, review: "특별한 매력이 없는 기본 사이드 메뉴 느낌." },
+  { name: "짜장면", count: 28, rankChange: 2, review: "무난하지만 특별한 맛의 임팩트는 약해요." },
+  { name: "해물짬뽕", count: 31, rankChange: -2, review: "가격 대비 해물 양이 아쉬운 경우가 종종 있어요." },
 ];
 const dailyWorstMenus = [
-  { name: "김치찌개", count: 120, rankChange: 1, review: "국물이 시원해요!" },
-  { name: "된장찌개", count: 95, rankChange: -1, review: "구수한 맛이에요." },
-  { name: "제육볶음", count: 80, rankChange: 0, review: "매콤한 맛이 일품!" },
-  { name: "비빔밥", count: 75, rankChange: 2, review: "야채가 신선해요." },
-  { name: "냉면", count: 60, rankChange: -2, review: "시원하게 한 그릇." },
+ { name: "망고크림중새우", count: 12, rankChange: 1, review: "조금 느끼하고 호불호가 갈릴 수 있는 메뉴" },
+  { name: "군만두", count: 15, rankChange: 0, review: "특별한 매력이 없는 기본 사이드 메뉴 느낌." },
+   { name: "볶음밥", count: 18, rankChange: -1, review: "평범한 맛으로 임팩트가 부족한 편이에요." },
+  { name: "해물짬뽕", count: 23, rankChange: -2, review: "가격 대비 해물 양이 아쉬운 경우가 종종 있어요." },
+   { name: "볶음밥", count: 30, rankChange: -1, review: "평범한 맛으로 임팩트가 부족한 편이에요." },
 ];
 
 
@@ -155,7 +155,7 @@ export default function MenuStatusCard({ className }: { className?: string }) {
           </div>
 
           {/* 판매 개수 */}
-          <span className="text-right text-gray-800 font-bold text-lg">
+          <span className="text-right text-[#FF6B35] font-bold text-lg">
             {menu.count}개
           </span>
         </div>

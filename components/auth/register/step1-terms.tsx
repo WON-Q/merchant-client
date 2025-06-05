@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowLeft, ArrowRight, CheckCircle2, Shield } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -12,43 +14,74 @@ interface Step1Props {
   formData?: Partial<RegisterFormData>;
 }
 
-/**
- * 약관 동의 단계 (Step1) 컴포넌트
- */
+const STORAGE_KEY = "register_step1_terms";
+
 export default function Step1Terms({
   onNext,
   onPrev,
   formData,
 }: Step1Props) {
-  // 약관 동의 상태 관리
   const [agreements, setAgreements] = useState({
-    allAgreed: formData?.allAgreed || false,
-    serviceTerms: formData?.serviceTerms || false,
-    privacyTerms: formData?.privacyTerms || false,
-    marketingTerms: formData?.marketingTerms || false,
+    allAgreed: false,
+    serviceTerms: false,
+    privacyTerms: false,
+    marketingTerms: false,
   });
+
+  // ✅ 최초 1회 초기화 여부
+  const [didInit, setDidInit] = useState(false);
+
+  // ✅ 최초 1회 localStorage + formData 병합 후 초기화
+  useEffect(() => {
+    if (!didInit) {
+      const savedAgreements = localStorage.getItem(STORAGE_KEY);
+      let initialAgreements = {
+        allAgreed: formData?.allAgreed || false,
+        serviceTerms: formData?.serviceTerms || false,
+        privacyTerms: formData?.privacyTerms || false,
+        marketingTerms: formData?.marketingTerms || false,
+      };
+
+      if (savedAgreements) {
+        try {
+          const parsed = JSON.parse(savedAgreements);
+          initialAgreements = { ...initialAgreements, ...parsed };
+        } catch (e) {
+          console.error("약관 동의 로드 실패", e);
+        }
+      }
+
+      setAgreements(initialAgreements);
+      setDidInit(true);
+    }
+  }, [formData, didInit]);
+
+  // ✅ agreements 변경 시 localStorage 저장
+  useEffect(() => {
+    if (didInit) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(agreements));
+    }
+  }, [agreements, didInit]);
 
   // 폼 제출 시도 여부 (에러 표시 용도)
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   // 약관 동의 상태 변경 시 allAgreed 상태 업데이트
   useEffect(() => {
-  const { serviceTerms, privacyTerms, marketingTerms } = agreements;
+    const { serviceTerms, privacyTerms, marketingTerms } = agreements;
+    const allChecked = serviceTerms && privacyTerms && marketingTerms;
 
-  const allChecked = serviceTerms && privacyTerms && marketingTerms;
-
-  setAgreements((prev) => {
-    if (prev.allAgreed !== allChecked) {
-      return { ...prev, allAgreed: allChecked };
-    }
-    return prev; // 변화 없으면 그대로 반환 (렌더링 막음)
-  });
-}, [
-  agreements.serviceTerms,
-  agreements.privacyTerms,
-  agreements.marketingTerms,
-]);
-
+    setAgreements((prev) => {
+      if (prev.allAgreed !== allChecked) {
+        return { ...prev, allAgreed: allChecked };
+      }
+      return prev;
+    });
+  }, [
+    agreements.serviceTerms,
+    agreements.privacyTerms,
+    agreements.marketingTerms,
+  ]);
 
   // 모든 약관 동의 처리
   const handleAllAgree = (checked: boolean) => {
@@ -75,7 +108,6 @@ export default function Step1Terms({
   const handleSubmit = () => {
     setFormSubmitted(true);
 
-    // 필수 약관 동의 여부 확인
     if (!agreements.serviceTerms || !agreements.privacyTerms) {
       return;
     }
@@ -88,7 +120,6 @@ export default function Step1Terms({
     } as Step1Data);
   };
 
-  // 필수 약관에 대한 에러 메시지 표시 여부
   const showServiceTermsError = formSubmitted && !agreements.serviceTerms;
   const showPrivacyTermsError = formSubmitted && !agreements.privacyTerms;
 
@@ -117,9 +148,7 @@ export default function Step1Terms({
                 size="lg"
               />
               <div className="space-y-1 leading-none">
-                <label className="text-lg font-bold">
-                  모든 약관에 동의합니다
-                </label>
+                <label className="text-lg font-bold">모든 약관에 동의합니다</label>
                 <p className="text-sm text-gray-500">
                   필수 약관 및 선택 약관에 모두 동의합니다
                 </p>
@@ -152,7 +181,7 @@ export default function Step1Terms({
                   <Link
                     href="/terms/services"
                     className="text-[#FF6B35] hover:underline"
-                    target="_blank"
+                    target="_self"
                   >
                     약관 보기 →
                   </Link>
@@ -189,7 +218,7 @@ export default function Step1Terms({
                   <Link
                     href="/terms/privacy"
                     className="text-[#FF6B35] hover:underline"
-                    target="_blank"
+                    target="_self"
                   >
                     약관 보기 →
                   </Link>
@@ -226,7 +255,7 @@ export default function Step1Terms({
                   <Link
                     href="/terms/marketing"
                     className="text-[#FF6B35] hover:underline"
-                    target="_blank"
+                    target="_self"
                   >
                     약관 보기 →
                   </Link>
@@ -256,7 +285,7 @@ export default function Step1Terms({
         </div>
       </StepContainer>
 
-      <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 flex items-start gap-3">
+      <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 flex items-start gap-3 mt-8">
         <CheckCircle2 className="h-8 w-8 text-blue-500 shrink-0 mt-1" />
         <div className="text-blue-800">
           <h4 className="font-medium">안전한 정보 보호</h4>

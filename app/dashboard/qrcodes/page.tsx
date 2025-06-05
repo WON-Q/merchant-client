@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Copy, Edit, Trash,Download  } from "lucide-react";
 import QrGenerateModal from "@/components/dashboard/qrcodes/QrGenerateModal";
 import Image from "next/image";
 
@@ -21,11 +22,17 @@ interface Table {
 export default function QRCodesPage() {
   const [tables, setTables] = useState<Table[]>([]);
   const [generateModalTable, setGenerateModalTable] = useState<{ tableNumber: number } | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // ✅ 로딩 상태 추가
 
   const fetchData = async () => {
-    const res = await fetch("/api/dashboard/qrcodes", { cache: "no-store" });
-    const json = await res.json();
-    if (json.success) setTables(json.data);
+    setIsLoading(true); // ✅ 로딩 시작
+    try {
+      const res = await fetch("/api/dashboard/qrcodes", { cache: "no-store" });
+      const json = await res.json();
+      if (json.success) setTables(json.data);
+    } finally {
+      setIsLoading(false); // ✅ 로딩 끝
+    }
   };
 
   const handleDownload = async (imageUrl: string, filename: string) => {
@@ -44,6 +51,18 @@ export default function QRCodesPage() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (isLoading) {
+    // ✅ 로딩 화면 추가
+    return (
+      <div className="flex flex-col items-center justify-center p-8 h-[70vh]">
+        <div className="text-center">
+          <div className="mb-4 text-xl font-medium">QR 정보를 불러오는 중...</div>
+          <div className="animate-pulse bg-gray-200 h-8 w-48 rounded-md mx-auto"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col">
@@ -97,38 +116,44 @@ export default function QRCodesPage() {
                     {table.lastUsed && <p>마지막 사용: {table.lastUsed}</p>}
                   </div>
 
-                  <div className="flex gap-1 w-full mt-2 justify-between">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      className="h-8 text-xs px-3 flex-1"
-                      onClick={() =>
-                        setGenerateModalTable({ tableNumber: Number(table.name.replace("테이블 ", "")) })
-                      }
-                    >
-                      {table.qrCode ? "QR 수정" : "QR 생성"}
-                    </Button>
+              <div className="flex gap-2 w-full mt-3 justify-center">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="h-8 px-4 flex items-center min-w-[112px]"
+              leftIcon={<Edit className="h-4 w-4 " />}
+              
+              onClick={() =>
+                setGenerateModalTable({ tableNumber: Number(table.name.replace("테이블 ", "")) })
+              }
+            >
+              {table.qrCode ? "수정" : "생성"}
+            </Button>
 
-                    {table.qrCode ? (
-                      <Button
-                        variant="primary"
-                        size="sm"
-                        className="h-8 text-xs px-3 flex-1"
-                        onClick={() => handleDownload(table.qrCode!, `table-${table.id}-qr.png`)}
-                      >
-                        다운로드
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="primary"
-                        size="sm"
-                        className="h-8 text-xs px-3 flex-1"
-                        disabled
-                      >
-                        다운로드
-                      </Button>
-                    )}
-                  </div>
+          {table.qrCode ? (
+            <Button
+              variant="destructive"
+              size="sm"
+              leftIcon={<Download className="h-4 w-4" />}
+              className="h-8 px-4 flex items-center min-w-[112px]"
+              onClick={() => handleDownload(table.qrCode!, `table-${table.id}-qr.png`)}
+            >
+              다운로드
+            </Button>
+          ) : (
+            <Button
+              variant="destructive"
+              size="sm"
+              leftIcon={<Download className="h-4 w-4" />}
+              className="h-8 px-4 flex items-center"
+              disabled
+            >
+      
+              다운로드
+            </Button>
+          )}
+        </div>
+
                 </Card>
               ))}
             </div>
