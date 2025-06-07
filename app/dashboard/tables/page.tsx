@@ -465,7 +465,7 @@ export default function TablesPage() {
                 <div
                   className={`w-4 h-4 rounded-full ${item.color} border-2 border-white`}
                 />
-                <span className="text-sm text-slate-700">{item.label}</span>
+                <span className="text-sm font-bold text-slate-700">{item.label}</span>
                 <span className="text-sm font-bold text-slate-900">
                   ({item.count})
                 </span>
@@ -473,16 +473,7 @@ export default function TablesPage() {
             );
           })}
           {/* WebSocket 연결 상태 표시 */}
-          <div className="flex items-center gap-2 px-3 py-2 shadow-sm rounded border bg-white">
-            <div
-              className={`w-3 h-3 rounded-full ${
-                isConnected ? "bg-green-400" : "bg-red-400"
-              }`}
-            />
-            <span className="text-xs text-slate-600">
-              {isConnected ? "실시간 연결됨" : "연결 끊어짐"}
-            </span>
-          </div>
+      
         </div>
 
         {/* Grid Layout */}

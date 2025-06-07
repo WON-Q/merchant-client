@@ -24,7 +24,7 @@ const dailyBestMenus = [
 
 // 월별 워스트 5 (월간 주문 약 1,900건 기준)
 const monthlyWorstMenus = [
-  { name: "망고크림새우", count:  74, rankChange:  1 },
+  { name: "크림새우", count:  74, rankChange:  1 },
   { name: "볶음밥",       count:  85, rankChange: -1 },
   { name: "군만두",       count: 112, rankChange:  0 },
   { name: "짜장면",       count: 119, rankChange:  2 },
@@ -33,7 +33,7 @@ const monthlyWorstMenus = [
 
 // 일별 워스트 5 (하루 주문 약 60건 기준)
 const dailyWorstMenus = [
-  { name: "망고크림새우", count: 2, rankChange:  1 },
+  { name: "크림새우", count: 2, rankChange:  1 },
   { name: "군만두",       count: 3, rankChange:  0 },
   { name: "볶음밥",       count: 4, rankChange: -1 },
   { name: "해물짬뽕",     count: 4, rankChange: -2 },

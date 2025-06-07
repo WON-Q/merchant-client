@@ -206,7 +206,7 @@ export default function SalesCalendarCard({ className }: Props) {
                     className=" p-2 text-xs text-gray-700 flex flex-col min-h-[120px]"
                   >
                     
-                    <div className="text-center font-bold text-[16px] mb-1 text-gray-800">
+                    <div className="text-center font-bold text-[20px] mb-1 text-gray-800">
                       {day}
                     </div>
                     
@@ -274,7 +274,7 @@ export default function SalesCalendarCard({ className }: Props) {
       key={day}
       className=" rounded-lg p-2 text-xs text-gray-700 flex flex-col min-h-[90px]"
     >
-      <div className="text-center font-bold text-[16px] mb-1 text-gray-800">
+      <div className="text-center font-bold text-[20px] mb-1 text-gray-800">
         {day}
       </div>
 

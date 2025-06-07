@@ -17,6 +17,21 @@ export function MenuTabs({
 }: MenuTabsProps) {
   const tabsRef = useRef<HTMLDivElement>(null);
 
+  // 1) 원하는 순서 배열 정의
+  const desiredOrder = [
+    "전체",
+    "면류",
+    "밥류",
+    "요리부",
+    "사이드",
+    "음료",
+    "기타",
+  ];
+const orderedCategories = desiredOrder.filter((c) =>
+    categories.includes(c)
+  );
+
+
   // 활성 탭이 변경될 때 스크롤 위치 조정
   useEffect(() => {
     if (tabsRef.current) {
@@ -51,9 +66,12 @@ export function MenuTabs({
         ref={tabsRef}
         className="flex w-full h-auto gap-1 overflow-x-auto no-scrollbar justify-center"
       >
-        {categories.map((category) => {
-          const tabValue = category === "전체" ? "all" : category.toLowerCase();
+        {orderedCategories.map((category) => {
+          const tabValue =
+            category === "전체" ? "all" : category.toLowerCase();
           const isActive = activeTab === tabValue;
+
+
 
           return (
             <button

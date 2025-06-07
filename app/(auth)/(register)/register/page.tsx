@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, Star } from "lucide-react";
@@ -28,6 +28,10 @@ export default function RegisterPage() {
     initialStep > 0 && initialStep <= 5 ? initialStep : 1
   );
   const [formData, setFormData] = useState<Partial<RegisterFormData>>({});
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step]);
 
   /**
    * 다음 단계로 이동하는 핸들러

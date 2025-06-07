@@ -3,6 +3,9 @@ import { cn } from "@/lib/utils";
 
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+
+   
+  labelClassName?: string;
   /**
    * 입력 필드의 변형 스타일을 지정합니다.
    * @default "default"
@@ -160,7 +163,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         className={cn("flex flex-col gap-1", fullWidth ? "w-full" : "w-auto")}
       >
         {label && (
-          <label className="text-sm font-medium text-neutral-700">
+          <label className="text-m font-bold text-neutral-700">
             {label}
             {isRequired && <span className="text-[#EF4444] ml-1">*</span>}
           </label>

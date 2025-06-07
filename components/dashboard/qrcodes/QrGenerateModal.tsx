@@ -63,7 +63,7 @@ export default function QrGenerateModal({
             <Input
               value={targetUrl}
               onChange={(e) => setTargetUrl(e.target.value)}
-              placeholder="https://your-frontend.com/merchantId/tableId/menus?firstVisit=true"
+              placeholder="www.wonq_store/merchantId/tableId/menus?firstVisit=true"
             />
           </div>
           <Button className="w-full mt-4" onClick={handleSubmit}>

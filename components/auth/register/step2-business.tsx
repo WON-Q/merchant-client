@@ -250,7 +250,7 @@ export default function Step2Business({
 
           {/* 사업자 등록증 업로드 */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-m font-bold text-gray-700 mb-1">
               사업자 등록증
             </label>
             <div className="w-full">
@@ -420,7 +420,7 @@ export default function Step2Business({
                     disabled={idChecked}
                   />
                 </div>
-                <div className="mt-0">
+                <div className="mt-7">
                   <Button
                     type="button"
                     variant="outline"

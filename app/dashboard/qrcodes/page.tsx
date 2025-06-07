@@ -86,12 +86,7 @@ export default function QRCodesPage() {
                 <Card key={table.id} className="w-full h-auto p-3 flex flex-col items-center justify-between border rounded-xl">
                   <div className="w-full">
                     <h2 className="text-base font-semibold">{table.name}</h2>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Badge className="bg-[#d2f0e2] text-[#3c3c3c] px-2 py-0.5 text-xs">
-                        {table.status === "active" ? "활성" : "비활성"}
-                      </Badge>
-                      <span className="text-xs text-gray-600">{table.capacity}명</span>
-                    </div>
+                  
                   </div>
 
                   <div className="w-40 h-40 mt-2 flex items-center justify-center border rounded-lg relative overflow-hidden">
@@ -111,10 +106,7 @@ export default function QRCodesPage() {
                     )}
                   </div>
 
-                  <div className="text-xs text-gray-600 w-full text-left mt-2">
-                    <p>생성일: {table.createdAt}</p>
-                    {table.lastUsed && <p>마지막 사용: {table.lastUsed}</p>}
-                  </div>
+                 
 
               <div className="flex gap-2 w-full mt-3 justify-center">
             <Button

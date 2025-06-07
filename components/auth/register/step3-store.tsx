@@ -194,7 +194,7 @@ export default function Step3Store({
         <div className="bg-white rounded-xl shadow-sm border p-6 md:p-8">
           {/* 매장 이미지 업로드 */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-m font-bold text-gray-700 mb-1">
               매장 대표 이미지
             </label>
             <div className="w-full">
@@ -255,7 +255,7 @@ export default function Step3Store({
 
           {/* 매장 소개 */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-m font-bold text-gray-700 mb-1">
               매장 소개
             </label>
             <div>
@@ -281,7 +281,7 @@ export default function Step3Store({
 
           {/* 여기서부터 수정: 영업 시간 위에 두 개 입력 폼 추가 */}
     <div className="mb-8">
-  <label className="block text-sm font-medium text-gray-700 mb-1">
+  <label className="block text-m font-bold text-gray-700 mb-1">
     공과금 납부일
   </label>
   <input
@@ -297,7 +297,7 @@ export default function Step3Store({
 </div>
 
     <div className="mb-8">
-  <label className="block text-sm font-medium text-gray-700 mb-1">
+  <label className="block text-m font-bold text-gray-700 mb-1">
     식자재 발주일
   </label>
   <input
@@ -316,7 +316,7 @@ export default function Step3Store({
 
           {/* 영업 시간 */}
           <div className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-m font-bold text-gray-700">
               영업 시간
             </label>
             <div className="bg-white border rounded-md p-4">
