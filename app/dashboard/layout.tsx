@@ -48,13 +48,11 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-30 flex h-18 items-center justify-between border-b bg-white px-4 shadow-sm md:px-6">
-        <Link href="/dashboard" className="hidden items-center gap-2 md:flex">
-          <span className="text-xl font-bold text-[#FF6B35]">원큐오더</span>
-        </Link>
-
+     <Link href="/dashboard" className="hidden items-center gap-2 md:flex">
+  <img src="/원큐로고.png" alt="로고" className="h-12 w-auto" />
+</Link>
         <div className="flex items-center gap-4">
-           <DashboardDayBanner label="공과금 납부일" dday="D-20" />
-           <DashboardDayBanner label="식자재 납부일" dday="D-13" />
+           <DashboardDayBanner  />
            <NotificationDropdown />
            <UserProfileDropdown
             userName={merchantInfo?.merchantOwnerName || "사장님"}

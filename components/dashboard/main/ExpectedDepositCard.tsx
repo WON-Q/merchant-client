@@ -9,9 +9,7 @@ interface Product {
 }
 
 const products: Product[] = [
-  { image: "/광고4.png" },
-  { image: "/광고2.png" },
-  { image: "/광고4.png" },
+  { image: "/광고1-1.png" }
 ];
 
 export default function RecommendedProductCard({ className }: { className?: string }) {
@@ -30,25 +28,25 @@ export default function RecommendedProductCard({ className }: { className?: stri
     <DashboardCard className={`relative flex flex-col gap-1 py-4 px-6 ${className}`}>
       {/* 타이틀 */}
      
-        <div className="text-2xl font-bold text-gray-900 py-2">금융상품 추천</div>
+        <div className="text-2xl font-bold text-gray-900 ">금융상품 추천</div>
 
-      <div className="w-full border-t"></div>
+      <div className="w-full border-t  border-gray-300"></div>
 
   
 
       {/* 이미지 배너 영역 */}
-      <div className="relative w-full aspect-[16/30] overflow-hidden my-2">
+      <div className="relative w-full aspect-[10/16] overflow-hidden my-2">
         {products.map((product, idx) => (
-          <Image
-            key={idx}
-            src={product.image}
-            alt={`광고 ${idx + 1}`}
-            fill // ⭐️ 부모를 꽉 채움 (relative 필요)
-            className={`
-              object-cover transition-opacity duration-700 ease-in-out
-              ${idx === currentIndex ? "opacity-100" : "opacity-0"}
-            `}
-          />
+       <Image
+  key={idx}
+  src={product.image}
+  alt={`광고 ${idx + 1}`}
+  fill
+  className={`
+    object-contain transition-opacity duration-700 ease-in-out
+    ${idx === currentIndex ? "opacity-100" : "opacity-0"}
+  `}
+/>
         ))}
       </div>
     </DashboardCard>

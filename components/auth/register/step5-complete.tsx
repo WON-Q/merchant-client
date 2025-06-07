@@ -58,7 +58,7 @@ export default function Step5Complete({ formData }: Step5Props) {
                 하여 서비스를 이용하실 수 있습니다.
               </p>
              <p className="text-sm text-gray-500">
-  ※ 승인 완료 시 안내 문자가 발송됩니다.
+  ※ 승인 완료시 유선상으로 상담이 진행될 예정입니다.
 </p>
             </div>
 

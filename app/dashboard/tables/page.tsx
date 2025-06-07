@@ -355,6 +355,39 @@ export default function TablesPage() {
     }
   };
 
+  // 테이블 초기화(손님 나감)
+  const handleClearTable = () => {
+    if (!selectedTable) return;
+
+    setLayout((prevLayout) =>
+      prevLayout.map((table) => {
+        if (table.i === selectedTable) {
+          return {
+            ...table,
+            orders: [], // 주문 초기화
+            status: "READY", // 상태 업데이트
+          };
+        }
+        return table;
+      })
+    );
+
+    // localStorage 도 업데이트
+    const updatedLayout = layout.map((table) => {
+      if (table.i === selectedTable) {
+        return {
+          ...table,
+          orders: [],
+          status: "READY",
+        };
+      }
+      return table;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedLayout));
+
+    console.log(`🧹 테이블 ${selectedTable} 주문 초기화 완료`);
+  };
+
   const getTableStatusClass = (item: TableLayout) => {
     const actualStatus = getTableStatus(item);
     switch (actualStatus) {
@@ -402,7 +435,7 @@ export default function TablesPage() {
               rightIcon={<Plus className="h-4 w-4" />}
               onClick={() => setShowAddModal(true)}
             >
-              테이블 추가
+              추가
             </Button>
           </div>
         </div>
@@ -460,9 +493,9 @@ export default function TablesPage() {
           <GridLayout
             className="layout"
             layout={layout}
-            cols={12}
+            cols={10}
             rowHeight={60}
-            width={editMode ? 960 : 1200}
+            width={editMode ? 960 : 960}
             isDraggable={editMode}
             isResizable={editMode}
             onLayoutChange={handleLayoutChange}
@@ -635,81 +668,82 @@ export default function TablesPage() {
           </Button>
         </div>
       )}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-200 bg-opacity-50 backdrop-blur-md">
-          <div className="bg-white p-6 rounded shadow-md w-[400px]">
-            <h2 className="text-xl font-bold mb-4">테이블 추가</h2>
 
-            <div className="flex flex-col gap-3">
-              {/* 테이블 번호 */}
-              <label className="text-sm font-medium">테이블 번호</label>
-              <input
-                type="number"
-                className="border rounded px-2 py-1"
-                id="newTableNumber"
-              />
+      {/* 테이블 추가 모달 */}
+      <Modal
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        title="테이블 추가"
+        size="md"
+        footer={
+          <>
+            <Button variant="outline" onClick={() => setShowAddModal(false)}>
+              취소
+            </Button>
+            <Button variant="primary" onClick={handleAddTable}>
+              추가하기
+            </Button>
+          </>
+        }
+      >
+        <div className="flex flex-col gap-3">
+          {/* 테이블 번호 */}
+          <label className="text-sm font-medium">테이블 번호</label>
+          <input
+            type="number"
+            className="border rounded px-2 py-1"
+            id="newTableNumber"
+          />
 
-              {/* 좌석 수 */}
-              <label className="text-sm font-medium">수용 인원</label>
-              <select className="border rounded px-2 py-1" id="newCapacity">
-                <option value={2}>2인</option>
-                <option value={4}>4인</option>
-                <option value={6}>6인</option>
-                <option value={8}>8인</option>
-              </select>
+          {/* 좌석 수 */}
+          <label className="text-sm font-medium">수용 인원</label>
+          <select className="border rounded px-2 py-1" id="newCapacity">
+            <option value={2}>2인</option>
+            <option value={4}>4인</option>
+            <option value={6}>6인</option>
+            <option value={8}>8인</option>
+          </select>
 
-              {/* 상태 */}
-              <label className="text-sm font-medium">테이블 상태</label>
-              <select className="border rounded px-2 py-1" id="newStatus">
-                <option value="READY">READY</option>
-                <option value="IN_PROGRESS">IN_PROGRESS</option>
-              </select>
+          {/* 상태 */}
+          <label className="text-sm font-medium">테이블 상태</label>
+          <select className="border rounded px-2 py-1" id="newStatus">
+            <option value="READY">READY</option>
+            <option value="IN_PROGRESS">IN_PROGRESS</option>
+          </select>
 
-              {/* 위치 X */}
-              <label className="text-sm font-medium">위치 X 좌표</label>
-              <input
-                type="number"
-                className="border rounded px-2 py-1"
-                id="newLocationX"
-              />
+          {/* 위치 X */}
+          <label className="text-sm font-medium">위치 X 좌표</label>
+          <input
+            type="number"
+            className="border rounded px-2 py-1"
+            id="newLocationX"
+          />
 
-              {/* 위치 Y */}
-              <label className="text-sm font-medium">위치 Y 좌표</label>
-              <input
-                type="number"
-                className="border rounded px-2 py-1"
-                id="newLocationY"
-              />
+          {/* 위치 Y */}
+          <label className="text-sm font-medium">위치 Y 좌표</label>
+          <input
+            type="number"
+            className="border rounded px-2 py-1"
+            id="newLocationY"
+          />
 
-              {/* 너비 */}
-              <label className="text-sm font-medium">너비 (width)</label>
-              <input
-                type="number"
-                className="border rounded px-2 py-1"
-                id="newLocationW"
-              />
+          {/* 너비 */}
+          <label className="text-sm font-medium">너비 (width)</label>
+          <input
+            type="number"
+            className="border rounded px-2 py-1"
+            id="newLocationW"
+          />
 
-              {/* 높이 */}
-              <label className="text-sm font-medium">높이 (height)</label>
-              <input
-                type="number"
-                className="border rounded px-2 py-1"
-                id="newLocationH"
-              />
-            </div>
-
-            {/* 버튼 영역 */}
-            <div className="flex justify-end gap-2 mt-6">
-              <Button variant="outline" onClick={() => setShowAddModal(false)}>
-                취소
-              </Button>
-              <Button variant="primary" onClick={handleAddTable}>
-                추가하기
-              </Button>
-            </div>
-          </div>
+          {/* 높이 */}
+          <label className="text-sm font-medium">높이 (height)</label>
+          <input
+            type="number"
+            className="border rounded px-2 py-1"
+            id="newLocationH"
+          />
         </div>
-      )}
+      </Modal>
 
       {/* 테이블 상세 정보 모달 */}
       {showDetailModal && selectedTableData && (
@@ -906,9 +940,15 @@ export default function TablesPage() {
             )}
 
             {/* 모달 하단 버튼 */}
-            <div className="flex justify-end pt-4 border-t border-gray-200">
+            <div className="flex justify-end pt-4 border-t border-gray-200 gap-2">
               <Button variant="outline" onClick={closeDetailModal}>
                 닫기
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={handleClearTable}
+              >
+                초기화
               </Button>
             </div>
           </div>

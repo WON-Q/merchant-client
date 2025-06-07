@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ArrowLeft, ArrowRight, CreditCard } from "lucide-react";
-
+import React from "react";
+import { Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dropdown } from "@/components/ui/dropdown";
@@ -102,9 +103,7 @@ export default function Step4Account({ onNext, onPrev, formData }: Step4Props) {
         <p className="text-gray-500">정산을 위한 계좌 정보를 입력해주세요.</p>
         
       </div>
-          <p className="text-m text-gray-500 mt-6">
-          ※ 일일 정산은 <span className="font-medium text-[#FF6B35]">02:00</span> 에 진행됩니다.
-        </p>
+        
 
       <div className="space-y-6">
         <div className="bg-white rounded-xl shadow-sm border p-6 md:p-8">
@@ -157,9 +156,16 @@ export default function Step4Account({ onNext, onPrev, formData }: Step4Props) {
             <p className="text-sm text-gray-500 mt-1">
               사업자등록증상 대표자명과 동일해야 합니다.
             </p>
-          </div>
-        </div>
 
+   
+        </div>
+             <div className="mt-3 flex items-center bg-[#FF6B35]/10 p-3 rounded-lg">
+    <Clock className="h-4 w-4 text-[#FF6B35] mr-2" />
+    <p className="text-sm text-[#FF6B35] font-medium m-0">
+      ※ 일일 정산은 <span className="font-semibold">02:00</span>에 진행됩니다.
+    </p>
+  </div>
+          </div>
         {/* 에러 메시지 표시 */}
         {signupError && (
           <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-600 text-sm">

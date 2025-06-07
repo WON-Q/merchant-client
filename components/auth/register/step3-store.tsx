@@ -279,6 +279,41 @@ export default function Step3Store({
             )}
           </div>
 
+          {/* 여기서부터 수정: 영업 시간 위에 두 개 입력 폼 추가 */}
+    <div className="mb-8">
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    공과금 납부일
+  </label>
+  <input
+    type="number"
+    min="1"
+    max="31"
+    placeholder="예: 5일"
+    className="w-full px-4 py-2 border border-[#D2D9E0] rounded-lg shadow-sm focus:outline-none focus:border-[#FF6B35] focus:ring-[#FF6B35]"
+  />
+  <p className="text-sm text-gray-500 mt-1">
+    매월 공과금을 납부할 날짜(1~31)를 입력해주세요.
+  </p>
+</div>
+
+    <div className="mb-8">
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    식자재 발주일
+  </label>
+  <input
+    type="number"
+    min="1"
+    max="31"
+    placeholder="예: 20일"
+    className="w-full px-4 py-2 border border-[#D2D9E0] rounded-lg shadow-sm focus:outline-none focus:border-[#FF6B35] focus:ring-[#FF6B35]"
+  />
+  <p className="text-sm text-gray-500 mt-1">
+    매월 식자재를 발주할 날짜(1~31)를 입력해주세요.
+  </p>
+</div>
+    {/* 여기까지 수정 */}
+
+
           {/* 영업 시간 */}
           <div className="space-y-4">
             <label className="block text-sm font-medium text-gray-700">

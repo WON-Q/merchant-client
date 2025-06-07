@@ -81,10 +81,10 @@ export function NotificationDropdown() {
       {/* 알림 버튼 */}
       <Button
         variant="ghost"
-        className="relative p-2 h-10 w-10"
+        className="relative p-2 h-10 w-10 overflow-visible"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <Bell className="h-6 w-6 text-[#FF6B35]" />
+        <Bell className="h-8 w-8   text-[#FF6B35]" />
         {notifications.length > 0 && (
           <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
         )}
@@ -102,7 +102,7 @@ export function NotificationDropdown() {
           style={{ transform: "translateZ(0)" }}
         >
           <div className="p-4 border-b border-neutral-200 font-bold text-base flex justify-between items-center">
-            <span>알림 내역</span>
+            <span>주문 알림</span>
             <div className="flex items-center">
               <button
                 onClick={(e) => {
